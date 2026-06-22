@@ -1,0 +1,233 @@
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ChevronDown, Grid2x2, List, Search, X, Eye, Heart, Check, ChevronUp, ChevronLeft, ChevronRight } from "lucide-react";
+import { SiteLayout } from "@/components/site/SiteLayout";
+import { shopItems } from "@/lib/hype-data";
+
+export const Route = createFileRoute("/shop")({
+  head: () => ({
+    meta: [
+      { title: "Shop — HYPE Verified Sneakers, Apparel & Collectibles" },
+      { name: "description", content: "Browse Buy Now and fixed-price listings from HYPE-verified sellers. Filter by brand, size, condition and price." },
+      { property: "og:title", content: "Shop — HYPE Verified Listings" },
+      { property: "og:description", content: "Browse Buy Now listings from HYPE-verified sellers." },
+    ],
+  }),
+  component: ShopPage,
+});
+
+function ShopPage() {
+  return (
+    <SiteLayout>
+      <Crumbs />
+      <div className="bg-shop-bg">
+        <div className="mx-auto max-w-[1440px] px-8 py-9">
+          <TopBar />
+          <Chips />
+          <div className="grid gap-9 lg:grid-cols-[290px_1fr]">
+            <Filters />
+            <div>
+              <ProductGrid />
+              <Pager />
+            </div>
+          </div>
+        </div>
+      </div>
+    </SiteLayout>
+  );
+}
+
+function Crumbs() {
+  return (
+    <div className="bg-cream/60 px-8 py-5 text-sm text-ink/70">
+      <div className="mx-auto max-w-[1440px]">
+        <Link to="/" className="hover:underline">Home</Link>
+        <span className="mx-2 opacity-50">/</span>
+        <Link to="/shop" className="hover:underline">Shop</Link>
+        <span className="mx-2 opacity-50">/</span>
+        <span className="text-ink">Browse Listings</span>
+      </div>
+    </div>
+  );
+}
+
+function TopBar() {
+  return (
+    <div className="mb-5 flex items-end justify-between">
+      <p className="text-lg text-ink/65">Fixed price and Buy Now listings.</p>
+      <div className="flex items-center gap-3">
+        <button className="flex items-center gap-6 rounded-xl border border-line bg-white px-5 py-3 text-sm font-medium">
+          Sort by: Newest <ChevronDown size={13} />
+        </button>
+        <button className="grid h-12 w-12 place-items-center rounded-xl border border-line bg-white">
+          <Grid2x2 size={18} />
+        </button>
+        <button className="grid h-12 w-12 place-items-center rounded-xl border border-line bg-white">
+          <List size={18} />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function Chips() {
+  const chips = ["Nike", "Jordan", "UK 9", "DS / Brand New", "₹0 – ₹50,000"];
+  return (
+    <div className="mb-7 flex flex-wrap items-center gap-3">
+      {chips.map((c) => (
+        <span key={c} className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-4 py-2 text-sm font-medium">
+          {c} <X size={12} className="opacity-60" />
+        </span>
+      ))}
+      <button className="text-sm font-bold text-red">Clear all</button>
+      <span className="ml-auto text-base text-ink/45">128 results</span>
+    </div>
+  );
+}
+
+function Filters() {
+  return (
+    <aside className="self-start rounded-2xl border border-line-soft bg-white px-6 pb-7 pt-2">
+      <FilterSection title="Category">
+        <RadioRow label="All Categories" checked />
+        <RadioRow label="Sneakers" count={1842} />
+        <RadioRow label="Apparel" count={632} />
+        <RadioRow label="Collectibles" count={156} />
+      </FilterSection>
+      <FilterSection title="Brand">
+        <div className="mb-3 flex items-center gap-2 rounded-lg border border-line px-3 py-2.5 text-sm text-ink/45">
+          <Search size={15} /> Search brand
+        </div>
+        <RadioRow label="Nike" checked count={972} />
+        <RadioRow label="Jordan" count={645} />
+        <RadioRow label="Adidas" count={214} />
+        <RadioRow label="New Balance" count={128} />
+        <RadioRow label="Other" count={671} />
+      </FilterSection>
+      <FilterSection title="Size (UK)">
+        <div className="grid grid-cols-4 gap-2">
+          {["All", 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, "18+", 17].map((s, i) => (
+            <button
+              key={i}
+              className={`rounded-md border border-line py-2.5 text-sm font-semibold transition ${
+                s === "All" || s === 9 ? "border-ink bg-ink text-cream" : "bg-white hover:border-ink"
+              }`}
+            >
+              {s}
+            </button>
+          ))}
+        </div>
+      </FilterSection>
+      <FilterSection title="Condition">
+        <CheckRow label="All" />
+        <CheckRow label="DS / Brand New" count={1298} checked />
+        <CheckRow label="Like New" count={512} />
+        <CheckRow label="Very Good" count={389} />
+        <CheckRow label="Good" count={198} />
+        <CheckRow label="Fair" count={77} />
+      </FilterSection>
+      <FilterSection title="Price Range">
+        <div className="mb-2 text-[13px] text-ink/55">Min</div>
+        <input defaultValue="₹ 0" className="mb-4 w-full rounded-lg border border-line px-3.5 py-3 text-sm" />
+        <input type="range" defaultValue={80} className="w-full accent-ink" />
+      </FilterSection>
+      <FilterSection title="Sort">
+        <RadioRow label="Newest" checked />
+        <RadioRow label="Price: Low to High" />
+        <RadioRow label="Price: High to Low" />
+        <RadioRow label="Most Watched" />
+      </FilterSection>
+    </aside>
+  );
+}
+
+function FilterSection({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="border-b border-line-soft py-6 last:border-none">
+      <div className="mb-4 flex items-center justify-between">
+        <h4 className="text-[12px] font-bold uppercase tracking-[0.16em]">{title}</h4>
+        <ChevronUp size={13} className="opacity-60" />
+      </div>
+      {children}
+    </div>
+  );
+}
+
+function RadioRow({ label, checked, count }: { label: string; checked?: boolean; count?: number }) {
+  return (
+    <label className="flex cursor-pointer items-center justify-between py-1.5 text-[15px]">
+      <span className="flex items-center gap-3">
+        <span className={`grid h-[17px] w-[17px] place-items-center rounded-full border-[1.6px] ${checked ? "border-ink" : "border-ink/35"}`}>
+          {checked && <span className="h-2 w-2 rounded-full bg-ink" />}
+        </span>
+        {label}
+      </span>
+      {count !== undefined && <span className="text-sm text-ink/45">{count}</span>}
+    </label>
+  );
+}
+
+function CheckRow({ label, checked, count }: { label: string; checked?: boolean; count?: number }) {
+  return (
+    <label className="flex cursor-pointer items-center justify-between py-1.5 text-[15px]">
+      <span className="flex items-center gap-3">
+        <span className={`grid h-[17px] w-[17px] place-items-center rounded border-[1.6px] ${checked ? "border-ink bg-ink" : "border-ink/35"}`}>
+          {checked && <Check size={11} className="text-cream" />}
+        </span>
+        {label}
+      </span>
+      {count !== undefined && <span className="text-sm text-ink/45">{count}</span>}
+    </label>
+  );
+}
+
+function ProductGrid() {
+  return (
+    <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+      {shopItems.map((p) => (
+        <article key={p.id} className="overflow-hidden rounded-2xl bg-ink text-cream shadow-[0_10px_24px_-16px_rgba(0,0,0,0.4)]">
+          <div className="relative aspect-square">
+            <img src={p.image} alt={p.name} width={400} height={400} loading="lazy" className="h-full w-full object-cover" />
+            {p.verified && (
+              <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-green px-2.5 py-1 text-[10px] font-bold text-green-ink">
+                <span className="h-1.5 w-1.5 rounded-full bg-green-ink" /> HYPE Verified
+              </span>
+            )}
+            <button className="absolute right-2.5 top-2.5 grid h-8 w-8 place-items-center rounded-full bg-white text-ink"><Heart size={14} /></button>
+            {p.watching !== undefined && (
+              <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-black/55 px-2.5 py-1 text-[11px] text-cream">
+                <Eye size={12} /> {p.watching} watching
+              </span>
+            )}
+          </div>
+          <div className="px-4 pb-5 pt-4">
+            <h3 className="min-h-[40px] text-[15px] font-semibold leading-snug">{p.name}</h3>
+            <div className="mt-1 text-xs text-cream/55">{p.condition}</div>
+            <div className="mt-2 font-display text-lg">₹{p.price.toLocaleString("en-IN")}</div>
+          </div>
+        </article>
+      ))}
+    </div>
+  );
+}
+
+function Pager() {
+  const pages = ["<", 1, 2, 3, "…", 9, ">"];
+  return (
+    <div className="mt-12 flex items-center justify-center gap-3">
+      {pages.map((p, i) => {
+        const Icon = p === "<" ? ChevronLeft : p === ">" ? ChevronRight : null;
+        const isActive = p === 1;
+        return (
+          <button
+            key={i}
+            className={`grid h-12 min-w-[48px] place-items-center rounded-xl border border-line bg-white text-[15px] font-semibold ${
+              isActive ? "border-ink bg-ink text-cream" : "hover:border-ink"
+            }`}
+          >
+            {Icon ? <Icon size={16} /> : p}
+          </button>
+        );
+      })}
+    </div>
+  );
+}

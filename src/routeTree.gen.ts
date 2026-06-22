@@ -9,38 +9,284 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ShopRouteImport } from './routes/shop'
+import { Route as SellRouteImport } from './routes/sell'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
+import { Route as LiveAuctionsIdRouteImport } from './routes/live-auctions.$id'
+import { Route as DashboardSettingsRouteImport } from './routes/dashboard.settings'
+import { Route as DashboardPayoutsRouteImport } from './routes/dashboard.payouts'
+import { Route as DashboardOrdersRouteImport } from './routes/dashboard.orders'
+import { Route as DashboardListingsRouteImport } from './routes/dashboard.listings'
+import { Route as DashboardAnalyticsRouteImport } from './routes/dashboard.analytics'
+import { Route as DashboardCreateListingIndexRouteImport } from './routes/dashboard.create-listing.index'
+import { Route as DashboardCreateListingSlugRouteImport } from './routes/dashboard.create-listing.$slug'
+import { Route as DashboardCreateListingSlugDetailsRouteImport } from './routes/dashboard.create-listing.$slug.details'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShopRoute = ShopRouteImport.update({
+  id: '/shop',
+  path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SellRoute = SellRouteImport.update({
+  id: '/sell',
+  path: '/sell',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const LiveAuctionsIdRoute = LiveAuctionsIdRouteImport.update({
+  id: '/live-auctions/$id',
+  path: '/live-auctions/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardSettingsRoute = DashboardSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardPayoutsRoute = DashboardPayoutsRouteImport.update({
+  id: '/payouts',
+  path: '/payouts',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardOrdersRoute = DashboardOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardListingsRoute = DashboardListingsRouteImport.update({
+  id: '/listings',
+  path: '/listings',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardAnalyticsRoute = DashboardAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardCreateListingIndexRoute =
+  DashboardCreateListingIndexRouteImport.update({
+    id: '/create-listing/',
+    path: '/create-listing/',
+    getParentRoute: () => DashboardRoute,
+  } as any)
+const DashboardCreateListingSlugRoute =
+  DashboardCreateListingSlugRouteImport.update({
+    id: '/create-listing/$slug',
+    path: '/create-listing/$slug',
+    getParentRoute: () => DashboardRoute,
+  } as any)
+const DashboardCreateListingSlugDetailsRoute =
+  DashboardCreateListingSlugDetailsRouteImport.update({
+    id: '/details',
+    path: '/details',
+    getParentRoute: () => DashboardCreateListingSlugRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/dashboard': typeof DashboardRouteWithChildren
+  '/sell': typeof SellRoute
+  '/shop': typeof ShopRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/dashboard/analytics': typeof DashboardAnalyticsRoute
+  '/dashboard/listings': typeof DashboardListingsRoute
+  '/dashboard/orders': typeof DashboardOrdersRoute
+  '/dashboard/payouts': typeof DashboardPayoutsRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/live-auctions/$id': typeof LiveAuctionsIdRoute
+  '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/create-listing/$slug': typeof DashboardCreateListingSlugRouteWithChildren
+  '/dashboard/create-listing/': typeof DashboardCreateListingIndexRoute
+  '/dashboard/create-listing/$slug/details': typeof DashboardCreateListingSlugDetailsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/sell': typeof SellRoute
+  '/shop': typeof ShopRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/dashboard/analytics': typeof DashboardAnalyticsRoute
+  '/dashboard/listings': typeof DashboardListingsRoute
+  '/dashboard/orders': typeof DashboardOrdersRoute
+  '/dashboard/payouts': typeof DashboardPayoutsRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/live-auctions/$id': typeof LiveAuctionsIdRoute
+  '/dashboard': typeof DashboardIndexRoute
+  '/dashboard/create-listing/$slug': typeof DashboardCreateListingSlugRouteWithChildren
+  '/dashboard/create-listing': typeof DashboardCreateListingIndexRoute
+  '/dashboard/create-listing/$slug/details': typeof DashboardCreateListingSlugDetailsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/dashboard': typeof DashboardRouteWithChildren
+  '/sell': typeof SellRoute
+  '/shop': typeof ShopRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/dashboard/analytics': typeof DashboardAnalyticsRoute
+  '/dashboard/listings': typeof DashboardListingsRoute
+  '/dashboard/orders': typeof DashboardOrdersRoute
+  '/dashboard/payouts': typeof DashboardPayoutsRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/live-auctions/$id': typeof LiveAuctionsIdRoute
+  '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/create-listing/$slug': typeof DashboardCreateListingSlugRouteWithChildren
+  '/dashboard/create-listing/': typeof DashboardCreateListingIndexRoute
+  '/dashboard/create-listing/$slug/details': typeof DashboardCreateListingSlugDetailsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/dashboard'
+    | '/sell'
+    | '/shop'
+    | '/sitemap.xml'
+    | '/dashboard/analytics'
+    | '/dashboard/listings'
+    | '/dashboard/orders'
+    | '/dashboard/payouts'
+    | '/dashboard/settings'
+    | '/live-auctions/$id'
+    | '/dashboard/'
+    | '/dashboard/create-listing/$slug'
+    | '/dashboard/create-listing/'
+    | '/dashboard/create-listing/$slug/details'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/sell'
+    | '/shop'
+    | '/sitemap.xml'
+    | '/dashboard/analytics'
+    | '/dashboard/listings'
+    | '/dashboard/orders'
+    | '/dashboard/payouts'
+    | '/dashboard/settings'
+    | '/live-auctions/$id'
+    | '/dashboard'
+    | '/dashboard/create-listing/$slug'
+    | '/dashboard/create-listing'
+    | '/dashboard/create-listing/$slug/details'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/dashboard'
+    | '/sell'
+    | '/shop'
+    | '/sitemap.xml'
+    | '/dashboard/analytics'
+    | '/dashboard/listings'
+    | '/dashboard/orders'
+    | '/dashboard/payouts'
+    | '/dashboard/settings'
+    | '/live-auctions/$id'
+    | '/dashboard/'
+    | '/dashboard/create-listing/$slug'
+    | '/dashboard/create-listing/'
+    | '/dashboard/create-listing/$slug/details'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
+  DashboardRoute: typeof DashboardRouteWithChildren
+  SellRoute: typeof SellRoute
+  ShopRoute: typeof ShopRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  LiveAuctionsIdRoute: typeof LiveAuctionsIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shop': {
+      id: '/shop'
+      path: '/shop'
+      fullPath: '/shop'
+      preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sell': {
+      id: '/sell'
+      path: '/sell'
+      fullPath: '/sell'
+      preLoaderRoute: typeof SellRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +294,130 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/live-auctions/$id': {
+      id: '/live-auctions/$id'
+      path: '/live-auctions/$id'
+      fullPath: '/live-auctions/$id'
+      preLoaderRoute: typeof LiveAuctionsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/settings': {
+      id: '/dashboard/settings'
+      path: '/settings'
+      fullPath: '/dashboard/settings'
+      preLoaderRoute: typeof DashboardSettingsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/payouts': {
+      id: '/dashboard/payouts'
+      path: '/payouts'
+      fullPath: '/dashboard/payouts'
+      preLoaderRoute: typeof DashboardPayoutsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/orders': {
+      id: '/dashboard/orders'
+      path: '/orders'
+      fullPath: '/dashboard/orders'
+      preLoaderRoute: typeof DashboardOrdersRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/listings': {
+      id: '/dashboard/listings'
+      path: '/listings'
+      fullPath: '/dashboard/listings'
+      preLoaderRoute: typeof DashboardListingsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/analytics': {
+      id: '/dashboard/analytics'
+      path: '/analytics'
+      fullPath: '/dashboard/analytics'
+      preLoaderRoute: typeof DashboardAnalyticsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/create-listing/': {
+      id: '/dashboard/create-listing/'
+      path: '/create-listing'
+      fullPath: '/dashboard/create-listing/'
+      preLoaderRoute: typeof DashboardCreateListingIndexRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/create-listing/$slug': {
+      id: '/dashboard/create-listing/$slug'
+      path: '/create-listing/$slug'
+      fullPath: '/dashboard/create-listing/$slug'
+      preLoaderRoute: typeof DashboardCreateListingSlugRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/create-listing/$slug/details': {
+      id: '/dashboard/create-listing/$slug/details'
+      path: '/details'
+      fullPath: '/dashboard/create-listing/$slug/details'
+      preLoaderRoute: typeof DashboardCreateListingSlugDetailsRouteImport
+      parentRoute: typeof DashboardCreateListingSlugRoute
+    }
   }
 }
 
+interface DashboardCreateListingSlugRouteChildren {
+  DashboardCreateListingSlugDetailsRoute: typeof DashboardCreateListingSlugDetailsRoute
+}
+
+const DashboardCreateListingSlugRouteChildren: DashboardCreateListingSlugRouteChildren =
+  {
+    DashboardCreateListingSlugDetailsRoute:
+      DashboardCreateListingSlugDetailsRoute,
+  }
+
+const DashboardCreateListingSlugRouteWithChildren =
+  DashboardCreateListingSlugRoute._addFileChildren(
+    DashboardCreateListingSlugRouteChildren,
+  )
+
+interface DashboardRouteChildren {
+  DashboardAnalyticsRoute: typeof DashboardAnalyticsRoute
+  DashboardListingsRoute: typeof DashboardListingsRoute
+  DashboardOrdersRoute: typeof DashboardOrdersRoute
+  DashboardPayoutsRoute: typeof DashboardPayoutsRoute
+  DashboardSettingsRoute: typeof DashboardSettingsRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
+  DashboardCreateListingSlugRoute: typeof DashboardCreateListingSlugRouteWithChildren
+  DashboardCreateListingIndexRoute: typeof DashboardCreateListingIndexRoute
+}
+
+const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardAnalyticsRoute: DashboardAnalyticsRoute,
+  DashboardListingsRoute: DashboardListingsRoute,
+  DashboardOrdersRoute: DashboardOrdersRoute,
+  DashboardPayoutsRoute: DashboardPayoutsRoute,
+  DashboardSettingsRoute: DashboardSettingsRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
+  DashboardCreateListingSlugRoute: DashboardCreateListingSlugRouteWithChildren,
+  DashboardCreateListingIndexRoute: DashboardCreateListingIndexRoute,
+}
+
+const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
+  DashboardRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ContactRoute: ContactRoute,
+  DashboardRoute: DashboardRouteWithChildren,
+  SellRoute: SellRoute,
+  ShopRoute: ShopRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  LiveAuctionsIdRoute: LiveAuctionsIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
