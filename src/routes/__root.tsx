@@ -1,5 +1,5 @@
 import "@fontsource/archivo-black/400.css";
-import "@fontsource-variable/inter";
+import "@fontsource-variable/inter/index.css";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
