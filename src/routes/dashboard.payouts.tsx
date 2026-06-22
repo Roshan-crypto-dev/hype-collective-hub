@@ -24,16 +24,16 @@ function Payouts() {
       <div className="mt-6 grid gap-5 lg:grid-cols-[1fr_1.25fr]">
         {/* Pending */}
         <div className="relative overflow-hidden rounded-2xl bg-[radial-gradient(120%_140%_at_80%_20%,#3a2c14,#0c0b0a_60%)] p-7 text-cream">
-          <div className="flex items-center gap-1.5 text-sm text-cream/70">Pending Payout <Info size={13} className="opacity-60" /></div>
-          <div className="mt-2 font-display text-[52px] leading-none tracking-[-0.01em]">₹48,720.00</div>
-          <div className="mt-4 inline-flex items-center gap-2.5 rounded-full bg-cream/10 px-5 py-2.5 text-sm font-medium ring-1 ring-cream/15">
-            <span className="grid h-5 w-5 place-items-center rounded-full bg-amber-bg text-ink"><Clock size={11} /></span>
-            3 orders awaiting payout
+          <div className="relative z-10">
+            <div className="flex items-center gap-1.5 text-sm text-cream/70">Pending Payout <Info size={13} className="opacity-60" /></div>
+            <div className="mt-2 font-display text-[48px] leading-none tracking-[-0.01em]">₹48,720.00</div>
+            <div className="mt-4 inline-flex items-center gap-2.5 rounded-full bg-cream/10 px-5 py-2.5 text-sm font-medium ring-1 ring-cream/15">
+              <span className="grid h-5 w-5 place-items-center rounded-full bg-amber-bg text-ink"><Clock size={11} /></span>
+              3 orders awaiting payout
+            </div>
+            <p className="mt-4 max-w-xs text-xs text-cream/55">Payouts are processed after authentication & delivery</p>
           </div>
-          <p className="mt-4 max-w-xs text-xs text-cream/55">Payouts are processed after authentication & delivery</p>
-          <div className="pointer-events-none absolute right-6 top-6 grid h-32 w-40 place-items-center rounded-2xl bg-[radial-gradient(circle_at_60%_40%,#2a2418,#0c0b0a)]">
-            <Wallet size={68} className="text-gold" />
-          </div>
+          <Wallet size={140} className="pointer-events-none absolute -right-4 -top-2 text-gold/30" strokeWidth={1.2} />
         </div>
 
         {/* Commission */}
