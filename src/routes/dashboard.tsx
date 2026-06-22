@@ -12,7 +12,7 @@ export const Route = createFileRoute("/dashboard")({
   component: DashboardLayout,
 });
 
-const items = [
+const items: { to: string; label: string; icon: typeof Home; exact?: boolean }[] = [
   { to: "/dashboard", label: "Overview", icon: Home, exact: true },
   { to: "/dashboard/listings", label: "My Listings", icon: List },
   { to: "/dashboard/create-listing", label: "Create Listing", icon: Plus },
@@ -20,7 +20,7 @@ const items = [
   { to: "/dashboard/payouts", label: "Payouts & Earnings", icon: Wallet },
   { to: "/dashboard/analytics", label: "Analytics", icon: BarChart3 },
   { to: "/dashboard/settings", label: "Account Settings", icon: Settings },
-] as const;
+];
 
 function DashboardLayout() {
   return (
