@@ -22,18 +22,25 @@ export const Route = createFileRoute("/shop")({
 });
 
 function ShopPage() {
+  const { q } = Route.useSearch();
+  const filtered = useMemo(() => {
+    if (!q) return shopItems;
+    const needle = q.toLowerCase();
+    return shopItems.filter((p) => p.name.toLowerCase().includes(needle) || p.condition.toLowerCase().includes(needle));
+  }, [q]);
+
   return (
     <SiteLayout>
       <Crumbs />
       <div className="bg-shop-bg">
-        <div className="mx-auto max-w-[1440px] px-8 py-9">
-          <TopBar />
-          <Chips />
+        <div className="mx-auto max-w-[1440px] px-4 py-9 sm:px-8">
+          <TopBar count={filtered.length} q={q} />
+          <Chips q={q} />
           <div className="grid gap-9 lg:grid-cols-[290px_1fr]">
             <Filters />
             <div>
-              <ProductGrid />
-              <Pager />
+              <ProductGrid items={filtered} />
+              {filtered.length > 0 && <Pager />}
             </div>
           </div>
         </div>
