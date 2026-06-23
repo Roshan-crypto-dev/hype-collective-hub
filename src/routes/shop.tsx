@@ -63,18 +63,20 @@ function Crumbs() {
   );
 }
 
-function TopBar() {
+function TopBar({ count, q }: { count: number; q?: string }) {
   return (
-    <div className="mb-5 flex items-end justify-between">
-      <p className="text-lg text-ink/65">Fixed price and Buy Now listings.</p>
+    <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
+      <p className="text-lg text-ink/65">
+        {q ? <>Results for <span className="font-semibold text-ink">"{q}"</span> · {count} match{count === 1 ? "" : "es"}</> : "Fixed price and Buy Now listings."}
+      </p>
       <div className="flex items-center gap-3">
         <button className="flex items-center gap-6 rounded-xl border border-line bg-white px-5 py-3 text-sm font-medium">
           Sort by: Newest <ChevronDown size={13} />
         </button>
-        <button className="grid h-12 w-12 place-items-center rounded-xl border border-line bg-white">
+        <button aria-label="Grid view" className="grid h-12 w-12 place-items-center rounded-xl border border-line bg-white">
           <Grid2x2 size={18} />
         </button>
-        <button className="grid h-12 w-12 place-items-center rounded-xl border border-line bg-white">
+        <button aria-label="List view" className="grid h-12 w-12 place-items-center rounded-xl border border-line bg-white">
           <List size={18} />
         </button>
       </div>
@@ -82,10 +84,15 @@ function TopBar() {
   );
 }
 
-function Chips() {
+function Chips({ q }: { q?: string }) {
   const chips = ["Nike", "Jordan", "UK 9", "DS / Brand New", "₹0 – ₹50,000"];
   return (
     <div className="mb-7 flex flex-wrap items-center gap-3">
+      {q && (
+        <Link to="/shop" className="inline-flex items-center gap-2 rounded-full border border-ink bg-ink px-4 py-2 text-sm font-medium text-cream">
+          Search: {q} <X size={12} />
+        </Link>
+      )}
       {chips.map((c) => (
         <span key={c} className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-4 py-2 text-sm font-medium">
           {c} <X size={12} className="opacity-60" />
