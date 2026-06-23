@@ -262,7 +262,6 @@ function ProductGrid({ items }: { items: typeof shopItems }) {
     </div>
   );
 }
-}
 
 function Pager() {
   const pages = ["<", 1, 2, 3, "…", 9, ">"];
