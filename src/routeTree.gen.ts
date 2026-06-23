@@ -9,27 +9,45 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WishlistRouteImport } from './routes/wishlist'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SignupRouteImport } from './routes/signup'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as SellRouteImport } from './routes/sell'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as CartRouteImport } from './routes/cart'
+import { Route as AccountRouteImport } from './routes/account'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
+import { Route as ShopIdRouteImport } from './routes/shop.$id'
 import { Route as LiveAuctionsIdRouteImport } from './routes/live-auctions.$id'
 import { Route as DashboardSettingsRouteImport } from './routes/dashboard.settings'
 import { Route as DashboardPayoutsRouteImport } from './routes/dashboard.payouts'
 import { Route as DashboardOrdersRouteImport } from './routes/dashboard.orders'
 import { Route as DashboardListingsRouteImport } from './routes/dashboard.listings'
 import { Route as DashboardAnalyticsRouteImport } from './routes/dashboard.analytics'
+import { Route as CheckoutSuccessRouteImport } from './routes/checkout.success'
 import { Route as DashboardCreateListingIndexRouteImport } from './routes/dashboard.create-listing.index'
 import { Route as DashboardCreateListingSlugRouteImport } from './routes/dashboard.create-listing.$slug'
 import { Route as DashboardCreateListingSlugDetailsRouteImport } from './routes/dashboard.create-listing.$slug.details'
 
+const WishlistRoute = WishlistRouteImport.update({
+  id: '/wishlist',
+  path: '/wishlist',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShopRoute = ShopRouteImport.update({
@@ -42,6 +60,11 @@ const SellRoute = SellRouteImport.update({
   path: '/sell',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -50,6 +73,21 @@ const DashboardRoute = DashboardRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CartRoute = CartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountRoute = AccountRouteImport.update({
+  id: '/account',
+  path: '/account',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -66,6 +104,11 @@ const DashboardIndexRoute = DashboardIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => DashboardRoute,
+} as any)
+const ShopIdRoute = ShopIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ShopRoute,
 } as any)
 const LiveAuctionsIdRoute = LiveAuctionsIdRouteImport.update({
   id: '/live-auctions/$id',
@@ -97,6 +140,11 @@ const DashboardAnalyticsRoute = DashboardAnalyticsRouteImport.update({
   path: '/analytics',
   getParentRoute: () => DashboardRoute,
 } as any)
+const CheckoutSuccessRoute = CheckoutSuccessRouteImport.update({
+  id: '/success',
+  path: '/success',
+  getParentRoute: () => CheckoutRoute,
+} as any)
 const DashboardCreateListingIndexRoute =
   DashboardCreateListingIndexRouteImport.update({
     id: '/create-listing/',
@@ -119,17 +167,25 @@ const DashboardCreateListingSlugDetailsRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/account': typeof AccountRoute
+  '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRouteWithChildren
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRouteWithChildren
+  '/login': typeof LoginRoute
   '/sell': typeof SellRoute
-  '/shop': typeof ShopRoute
+  '/shop': typeof ShopRouteWithChildren
+  '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/wishlist': typeof WishlistRoute
+  '/checkout/success': typeof CheckoutSuccessRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/listings': typeof DashboardListingsRoute
   '/dashboard/orders': typeof DashboardOrdersRoute
   '/dashboard/payouts': typeof DashboardPayoutsRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/live-auctions/$id': typeof LiveAuctionsIdRoute
+  '/shop/$id': typeof ShopIdRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/dashboard/create-listing/$slug': typeof DashboardCreateListingSlugRouteWithChildren
   '/dashboard/create-listing/': typeof DashboardCreateListingIndexRoute
@@ -138,16 +194,24 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/account': typeof AccountRoute
+  '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRouteWithChildren
   '/contact': typeof ContactRoute
+  '/login': typeof LoginRoute
   '/sell': typeof SellRoute
-  '/shop': typeof ShopRoute
+  '/shop': typeof ShopRouteWithChildren
+  '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/wishlist': typeof WishlistRoute
+  '/checkout/success': typeof CheckoutSuccessRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/listings': typeof DashboardListingsRoute
   '/dashboard/orders': typeof DashboardOrdersRoute
   '/dashboard/payouts': typeof DashboardPayoutsRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/live-auctions/$id': typeof LiveAuctionsIdRoute
+  '/shop/$id': typeof ShopIdRoute
   '/dashboard': typeof DashboardIndexRoute
   '/dashboard/create-listing/$slug': typeof DashboardCreateListingSlugRouteWithChildren
   '/dashboard/create-listing': typeof DashboardCreateListingIndexRoute
@@ -157,17 +221,25 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/account': typeof AccountRoute
+  '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRouteWithChildren
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRouteWithChildren
+  '/login': typeof LoginRoute
   '/sell': typeof SellRoute
-  '/shop': typeof ShopRoute
+  '/shop': typeof ShopRouteWithChildren
+  '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/wishlist': typeof WishlistRoute
+  '/checkout/success': typeof CheckoutSuccessRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/listings': typeof DashboardListingsRoute
   '/dashboard/orders': typeof DashboardOrdersRoute
   '/dashboard/payouts': typeof DashboardPayoutsRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/live-auctions/$id': typeof LiveAuctionsIdRoute
+  '/shop/$id': typeof ShopIdRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/dashboard/create-listing/$slug': typeof DashboardCreateListingSlugRouteWithChildren
   '/dashboard/create-listing/': typeof DashboardCreateListingIndexRoute
@@ -178,17 +250,25 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/account'
+    | '/cart'
+    | '/checkout'
     | '/contact'
     | '/dashboard'
+    | '/login'
     | '/sell'
     | '/shop'
+    | '/signup'
     | '/sitemap.xml'
+    | '/wishlist'
+    | '/checkout/success'
     | '/dashboard/analytics'
     | '/dashboard/listings'
     | '/dashboard/orders'
     | '/dashboard/payouts'
     | '/dashboard/settings'
     | '/live-auctions/$id'
+    | '/shop/$id'
     | '/dashboard/'
     | '/dashboard/create-listing/$slug'
     | '/dashboard/create-listing/'
@@ -197,16 +277,24 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/account'
+    | '/cart'
+    | '/checkout'
     | '/contact'
+    | '/login'
     | '/sell'
     | '/shop'
+    | '/signup'
     | '/sitemap.xml'
+    | '/wishlist'
+    | '/checkout/success'
     | '/dashboard/analytics'
     | '/dashboard/listings'
     | '/dashboard/orders'
     | '/dashboard/payouts'
     | '/dashboard/settings'
     | '/live-auctions/$id'
+    | '/shop/$id'
     | '/dashboard'
     | '/dashboard/create-listing/$slug'
     | '/dashboard/create-listing'
@@ -215,17 +303,25 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/account'
+    | '/cart'
+    | '/checkout'
     | '/contact'
     | '/dashboard'
+    | '/login'
     | '/sell'
     | '/shop'
+    | '/signup'
     | '/sitemap.xml'
+    | '/wishlist'
+    | '/checkout/success'
     | '/dashboard/analytics'
     | '/dashboard/listings'
     | '/dashboard/orders'
     | '/dashboard/payouts'
     | '/dashboard/settings'
     | '/live-auctions/$id'
+    | '/shop/$id'
     | '/dashboard/'
     | '/dashboard/create-listing/$slug'
     | '/dashboard/create-listing/'
@@ -235,21 +331,41 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AccountRoute: typeof AccountRoute
+  CartRoute: typeof CartRoute
+  CheckoutRoute: typeof CheckoutRouteWithChildren
   ContactRoute: typeof ContactRoute
   DashboardRoute: typeof DashboardRouteWithChildren
+  LoginRoute: typeof LoginRoute
   SellRoute: typeof SellRoute
-  ShopRoute: typeof ShopRoute
+  ShopRoute: typeof ShopRouteWithChildren
+  SignupRoute: typeof SignupRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  WishlistRoute: typeof WishlistRoute
   LiveAuctionsIdRoute: typeof LiveAuctionsIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/wishlist': {
+      id: '/wishlist'
+      path: '/wishlist'
+      fullPath: '/wishlist'
+      preLoaderRoute: typeof WishlistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/shop': {
@@ -266,6 +382,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SellRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dashboard': {
       id: '/dashboard'
       path: '/dashboard'
@@ -278,6 +401,27 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account': {
+      id: '/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -300,6 +444,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/dashboard/'
       preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof DashboardRoute
+    }
+    '/shop/$id': {
+      id: '/shop/$id'
+      path: '/$id'
+      fullPath: '/shop/$id'
+      preLoaderRoute: typeof ShopIdRouteImport
+      parentRoute: typeof ShopRoute
     }
     '/live-auctions/$id': {
       id: '/live-auctions/$id'
@@ -343,6 +494,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardAnalyticsRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/checkout/success': {
+      id: '/checkout/success'
+      path: '/success'
+      fullPath: '/checkout/success'
+      preLoaderRoute: typeof CheckoutSuccessRouteImport
+      parentRoute: typeof CheckoutRoute
+    }
     '/dashboard/create-listing/': {
       id: '/dashboard/create-listing/'
       path: '/create-listing'
@@ -366,6 +524,18 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface CheckoutRouteChildren {
+  CheckoutSuccessRoute: typeof CheckoutSuccessRoute
+}
+
+const CheckoutRouteChildren: CheckoutRouteChildren = {
+  CheckoutSuccessRoute: CheckoutSuccessRoute,
+}
+
+const CheckoutRouteWithChildren = CheckoutRoute._addFileChildren(
+  CheckoutRouteChildren,
+)
 
 interface DashboardCreateListingSlugRouteChildren {
   DashboardCreateListingSlugDetailsRoute: typeof DashboardCreateListingSlugDetailsRoute
@@ -408,14 +578,30 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
   DashboardRouteChildren,
 )
 
+interface ShopRouteChildren {
+  ShopIdRoute: typeof ShopIdRoute
+}
+
+const ShopRouteChildren: ShopRouteChildren = {
+  ShopIdRoute: ShopIdRoute,
+}
+
+const ShopRouteWithChildren = ShopRoute._addFileChildren(ShopRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AccountRoute: AccountRoute,
+  CartRoute: CartRoute,
+  CheckoutRoute: CheckoutRouteWithChildren,
   ContactRoute: ContactRoute,
   DashboardRoute: DashboardRouteWithChildren,
+  LoginRoute: LoginRoute,
   SellRoute: SellRoute,
-  ShopRoute: ShopRoute,
+  ShopRoute: ShopRouteWithChildren,
+  SignupRoute: SignupRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  WishlistRoute: WishlistRoute,
   LiveAuctionsIdRoute: LiveAuctionsIdRoute,
 }
 export const routeTree = rootRouteImport
