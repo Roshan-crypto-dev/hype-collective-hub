@@ -216,7 +216,7 @@ function ProductGrid({ items }: { items: typeof shopItems }) {
       {items.map((p) => {
         const wished = isWished(p.id);
         return (
-          <article key={p.id} className="group overflow-hidden rounded-2xl bg-ink text-cream shadow-[0_10px_24px_-16px_rgba(0,0,0,0.4)] transition hover:-translate-y-0.5">
+          <article key={p.id} className="group relative overflow-hidden rounded-2xl bg-ink text-cream shadow-[0_10px_24px_-16px_rgba(0,0,0,0.4)] transition hover:-translate-y-0.5">
             <Link to="/shop/$id" params={{ id: p.id }} className="block">
               <div className="relative aspect-square">
                 <img src={p.image} alt={p.name} width={400} height={400} loading="lazy" className="h-full w-full object-cover transition group-hover:scale-[1.02]" />
