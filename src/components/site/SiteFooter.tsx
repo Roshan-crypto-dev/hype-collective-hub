@@ -16,32 +16,30 @@ export function SiteFooter() {
             </p>
           </div>
           <div>
-            <h4 className="mb-5 text-[11px] font-bold uppercase tracking-[0.22em] text-cream">
-              Quick Links
-            </h4>
+            <h4 className="mb-5 text-[11px] font-bold uppercase tracking-[0.22em] text-cream">Marketplace</h4>
             <ul className="space-y-3 text-sm text-cream/75">
-              <li><Link to="/" className="hover:text-cream">Home</Link></li>
               <li><Link to="/shop" className="hover:text-cream">Shop</Link></li>
               <li><Link to="/live-auctions/chicago" className="hover:text-cream">Live Auctions</Link></li>
               <li><Link to="/sell" className="hover:text-cream">Sell With Us</Link></li>
-              <li><Link to="/about" className="hover:text-cream">About</Link></li>
-              <li><Link to="/contact" className="hover:text-cream">Contact</Link></li>
+              <li><Link to="/wishlist" className="hover:text-cream">Wishlist</Link></li>
+              <li><Link to="/account" className="hover:text-cream">Your Account</Link></li>
             </ul>
           </div>
           <div>
-            <h4 className="mb-5 text-[11px] font-bold uppercase tracking-[0.22em] text-cream">
-              Social Links
-            </h4>
-            <p className="text-sm leading-relaxed text-cream/75">
-              <span className="text-cream">@hypeindiahq</span> on X and<br />
-              other platforms
-            </p>
+            <h4 className="mb-5 text-[11px] font-bold uppercase tracking-[0.22em] text-cream">Help & Policies</h4>
+            <ul className="space-y-3 text-sm text-cream/75">
+              <li><Link to="/shipping" className="hover:text-cream">Shipping</Link></li>
+              <li><Link to="/returns" className="hover:text-cream">Returns & Refunds</Link></li>
+              <li><Link to="/contact" className="hover:text-cream">Contact Support</Link></li>
+              <li><Link to="/about" className="hover:text-cream">About HYPE</Link></li>
+            </ul>
           </div>
           <div>
-            <h4 className="mb-5 text-[11px] font-bold uppercase tracking-[0.22em] text-cream">
-              Download Our App
-            </h4>
-            <p className="text-sm text-cream/55">Coming soon</p>
+            <h4 className="mb-5 text-[11px] font-bold uppercase tracking-[0.22em] text-cream">Stay In The Loop</h4>
+            <p className="text-sm leading-relaxed text-cream/75">
+              <span className="text-cream">@hypeindiahq</span> on X and Instagram.<br />
+              App coming soon.
+            </p>
           </div>
         </div>
         <div className="mt-16 flex flex-col items-start justify-between gap-3 border-t border-cream/10 pt-8 text-[11px] uppercase tracking-[0.22em] text-cream/55 sm:flex-row sm:items-center">
@@ -50,9 +48,9 @@ export function SiteFooter() {
             <div>All rights reserved</div>
           </div>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-cream">Terms</a>
-            <a href="#" className="hover:text-cream">Privacy</a>
-            <a href="#" className="hover:text-cream">Policy</a>
+            <Link to="/terms" className="hover:text-cream">Terms</Link>
+            <Link to="/privacy" className="hover:text-cream">Privacy</Link>
+            <Link to="/returns" className="hover:text-cream">Returns</Link>
           </div>
         </div>
       </div>
