@@ -1,9 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ChevronDown, Grid2x2, List, Search, X, Eye, Heart, Check, ChevronUp, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronDown, Grid2x2, List, Search, X, Eye, Heart, Check, ChevronUp, ChevronLeft, ChevronRight, ShoppingBag } from "lucide-react";
+import { useMemo } from "react";
+import { z } from "zod";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { shopItems } from "@/lib/hype-data";
+import { useCart, formatINR } from "@/lib/cart-store";
+
+const searchSchema = z.object({ q: z.string().optional() });
 
 export const Route = createFileRoute("/shop")({
+  validateSearch: searchSchema,
   head: () => ({
     meta: [
       { title: "Shop — HYPE Verified Sneakers, Apparel & Collectibles" },
