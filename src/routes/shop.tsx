@@ -200,34 +200,68 @@ function CheckRow({ label, checked, count }: { label: string; checked?: boolean;
   );
 }
 
-function ProductGrid() {
+function ProductGrid({ items }: { items: typeof shopItems }) {
+  const { addToCart, toggleWish, isWished } = useCart();
+  if (items.length === 0) {
+    return (
+      <div className="grid place-items-center rounded-2xl bg-cream p-16 text-center">
+        <p className="font-display text-2xl">No matches</p>
+        <p className="mt-1 text-sm text-ink/60">Try a different search or clear filters.</p>
+        <Link to="/shop" className="mt-5 inline-flex rounded-full bg-ink px-5 py-2.5 text-xs font-semibold tracking-[0.14em] text-cream">RESET</Link>
+      </div>
+    );
+  }
   return (
     <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-      {shopItems.map((p) => (
-        <article key={p.id} className="overflow-hidden rounded-2xl bg-ink text-cream shadow-[0_10px_24px_-16px_rgba(0,0,0,0.4)]">
-          <div className="relative aspect-square">
-            <img src={p.image} alt={p.name} width={400} height={400} loading="lazy" className="h-full w-full object-cover" />
-            {p.verified && (
-              <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-green px-2.5 py-1 text-[10px] font-bold text-green-ink">
-                <span className="h-1.5 w-1.5 rounded-full bg-green-ink" /> HYPE Verified
-              </span>
-            )}
-            <button className="absolute right-2.5 top-2.5 grid h-8 w-8 place-items-center rounded-full bg-white text-ink"><Heart size={14} /></button>
-            {p.watching !== undefined && (
-              <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-black/55 px-2.5 py-1 text-[11px] text-cream">
-                <Eye size={12} /> {p.watching} watching
-              </span>
-            )}
-          </div>
-          <div className="px-4 pb-5 pt-4">
-            <h3 className="min-h-[40px] text-[15px] font-semibold leading-snug">{p.name}</h3>
-            <div className="mt-1 text-xs text-cream/55">{p.condition}</div>
-            <div className="mt-2 font-display text-lg">₹{p.price.toLocaleString("en-IN")}</div>
-          </div>
-        </article>
-      ))}
+      {items.map((p) => {
+        const wished = isWished(p.id);
+        return (
+          <article key={p.id} className="group overflow-hidden rounded-2xl bg-ink text-cream shadow-[0_10px_24px_-16px_rgba(0,0,0,0.4)] transition hover:-translate-y-0.5">
+            <Link to="/shop/$id" params={{ id: p.id }} className="block">
+              <div className="relative aspect-square">
+                <img src={p.image} alt={p.name} width={400} height={400} loading="lazy" className="h-full w-full object-cover transition group-hover:scale-[1.02]" />
+                {p.verified && (
+                  <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-green px-2.5 py-1 text-[10px] font-bold text-green-ink">
+                    <span className="h-1.5 w-1.5 rounded-full bg-green-ink" /> HYPE Verified
+                  </span>
+                )}
+                {p.watching !== undefined && (
+                  <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-black/55 px-2.5 py-1 text-[11px] text-cream">
+                    <Eye size={12} /> {p.watching} watching
+                  </span>
+                )}
+              </div>
+            </Link>
+            <button
+              onClick={(e) => { e.preventDefault(); toggleWish(p.id); }}
+              aria-pressed={wished}
+              aria-label={`${wished ? "Remove from" : "Add to"} wishlist`}
+              className={`absolute right-2.5 top-2.5 grid h-8 w-8 place-items-center rounded-full transition ${wished ? "bg-red text-cream" : "bg-white text-ink"}`}
+              style={{ position: "absolute" }}
+            >
+              <Heart size={14} fill={wished ? "currentColor" : "none"} />
+            </button>
+            <div className="px-4 pb-4 pt-4">
+              <Link to="/shop/$id" params={{ id: p.id }}>
+                <h3 className="min-h-[40px] text-[15px] font-semibold leading-snug hover:underline">{p.name}</h3>
+              </Link>
+              <div className="mt-1 text-xs text-cream/55">{p.condition}</div>
+              <div className="mt-2 flex items-end justify-between gap-2">
+                <div className="font-display text-lg">{formatINR(p.price)}</div>
+                <button
+                  onClick={() => addToCart({ id: p.id, name: p.name, image: p.image, price: p.price, size: "UK 9" })}
+                  className="inline-flex items-center gap-1.5 rounded-full bg-cream px-3 py-1.5 text-[11px] font-bold tracking-[0.12em] text-ink transition hover:bg-cream/85"
+                >
+                  <ShoppingBag size={12} /> ADD
+                </button>
+              </div>
+            </div>
+          </article>
+        );
+      })}
     </div>
   );
+}
 }
 
 function Pager() {
