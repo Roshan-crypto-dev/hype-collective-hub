@@ -11,7 +11,6 @@ import {
   Settings,
   Shield,
   ShoppingBag,
-  Truck,
   Users,
   type LucideIcon,
 } from "lucide-react";
@@ -147,4 +146,4 @@ export function StatusPill({ tone, children }: { tone: "green" | "amber" | "red"
   return <span className={`inline-flex rounded-full px-2.5 py-1 text-[11px] font-bold ${t}`}>{children}</span>;
 }
 
-export function Truck() { return null; }
+
