@@ -39,15 +39,17 @@ export type ShopItem = {
   image: string;
   watching?: number;
   verified?: boolean;
+  tag?: "hot" | "new" | "last-chance";
+  lastSale?: number;
 };
 
 export const shopItems: ShopItem[] = [
-  { id: "aj1-chicago", name: "Air Jordan 1 Retro High OG 'Chicago'", condition: "DS / Brand New", price: 28500, image: chicago, watching: 47, verified: true },
-  { id: "aj4-white", name: "Air Jordan 4 Retro 'White Cement'", condition: "DS / Brand New", price: 32900, image: jordan4, watching: 23, verified: true },
-  { id: "aj11-bred", name: "Air Jordan 11 Retro 'Bred'", condition: "DS / Brand New", price: 31500, image: offwhite, verified: true },
-  { id: "nb-990v6", name: "New Balance 990v6 Grey", condition: "DS / Brand New", price: 24999, image: dunk, verified: true },
-  { id: "yeezy-foam", name: "YEEZY Foam RNR 'Sand'", condition: "DS / Brand New", price: 12999, image: yeezy, verified: true },
-  { id: "aj1-unc", name: "Air Jordan 1 Retro High OG 'UNC Toe'", condition: "DS / Brand New", price: 27900, image: chicago, verified: true },
-  { id: "fog-hoodie", name: "Fear of God Essentials Hoodie Black", condition: "DS / Brand New", price: 8499, image: hoodie, verified: true },
-  { id: "bearbrick", name: "Bearbrick 100% & 400% Set", condition: "DS / Brand New", price: 14999, image: offwhite, watching: 12, verified: true },
+  { id: "aj1-chicago", name: "Air Jordan 1 Retro High OG 'Chicago'", condition: "DS / Brand New", price: 28500, image: chicago, watching: 47, verified: true, tag: "hot", lastSale: 27200 },
+  { id: "aj4-white", name: "Air Jordan 4 Retro 'White Cement'", condition: "DS / Brand New", price: 32900, image: jordan4, watching: 23, verified: true, tag: "new", lastSale: 33400 },
+  { id: "aj11-bred", name: "Air Jordan 11 Retro 'Bred'", condition: "DS / Brand New", price: 31500, image: offwhite, verified: true, lastSale: 30900 },
+  { id: "nb-990v6", name: "New Balance 990v6 Grey", condition: "DS / Brand New", price: 24999, image: dunk, verified: true, tag: "last-chance", lastSale: 24500 },
+  { id: "yeezy-foam", name: "YEEZY Foam RNR 'Sand'", condition: "DS / Brand New", price: 12999, image: yeezy, verified: true, lastSale: 13200 },
+  { id: "aj1-unc", name: "Air Jordan 1 Retro High OG 'UNC Toe'", condition: "DS / Brand New", price: 27900, image: chicago, verified: true, tag: "hot", lastSale: 27500 },
+  { id: "fog-hoodie", name: "Fear of God Essentials Hoodie Black", condition: "DS / Brand New", price: 8499, image: hoodie, verified: true, lastSale: 8200 },
+  { id: "bearbrick", name: "Bearbrick 100% & 400% Set", condition: "DS / Brand New", price: 14999, image: offwhite, watching: 12, verified: true, tag: "new", lastSale: 14400 },
 ];

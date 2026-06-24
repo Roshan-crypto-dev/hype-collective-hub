@@ -215,16 +215,26 @@ function ProductGrid({ items }: { items: typeof shopItems }) {
     <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
       {items.map((p) => {
         const wished = isWished(p.id);
+        const tag = p.tag === "hot"
+          ? { label: "HOT", cls: "bg-red text-cream" }
+          : p.tag === "new"
+            ? { label: "NEW", cls: "bg-gold text-ink" }
+            : p.tag === "last-chance"
+              ? { label: "LAST CHANCE", cls: "bg-amber-bg text-amber-ink" }
+              : null;
         return (
           <article key={p.id} className="group relative overflow-hidden rounded-2xl bg-ink text-cream shadow-[0_10px_24px_-16px_rgba(0,0,0,0.4)] transition hover:-translate-y-0.5">
             <Link to="/shop/$id" params={{ id: p.id }} className="block">
-              <div className="relative aspect-square">
-                <img src={p.image} alt={p.name} width={400} height={400} loading="lazy" className="h-full w-full object-cover transition group-hover:scale-[1.02]" />
-                {p.verified && (
-                  <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-green px-2.5 py-1 text-[10px] font-bold text-green-ink">
-                    <span className="h-1.5 w-1.5 rounded-full bg-green-ink" /> HYPE Verified
-                  </span>
-                )}
+              <div className="relative aspect-square overflow-hidden">
+                <img src={p.image} alt={p.name} width={400} height={400} loading="lazy" className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.06]" />
+                <div className="absolute left-3 top-3 flex flex-col items-start gap-1.5">
+                  {p.verified && (
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-green px-2.5 py-1 text-[10px] font-bold text-green-ink">
+                      <span className="h-1.5 w-1.5 rounded-full bg-green-ink" /> HYPE Verified
+                    </span>
+                  )}
+                  {tag && <span className={`rounded-full px-2.5 py-1 text-[10px] font-bold tracking-[0.1em] ${tag.cls}`}>{tag.label}</span>}
+                </div>
                 {p.watching !== undefined && (
                   <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-black/55 px-2.5 py-1 text-[11px] text-cream">
                     <Eye size={12} /> {p.watching} watching
@@ -236,8 +246,7 @@ function ProductGrid({ items }: { items: typeof shopItems }) {
               onClick={(e) => { e.preventDefault(); toggleWish(p.id); }}
               aria-pressed={wished}
               aria-label={`${wished ? "Remove from" : "Add to"} wishlist`}
-              className={`absolute right-2.5 top-2.5 grid h-8 w-8 place-items-center rounded-full transition ${wished ? "bg-red text-cream" : "bg-white text-ink"}`}
-              style={{ position: "absolute" }}
+              className={`absolute right-2.5 top-2.5 grid h-9 w-9 place-items-center rounded-full shadow transition ${wished ? "bg-red text-cream" : "bg-white text-ink opacity-0 group-hover:opacity-100"}`}
             >
               <Heart size={14} fill={wished ? "currentColor" : "none"} />
             </button>
@@ -245,7 +254,10 @@ function ProductGrid({ items }: { items: typeof shopItems }) {
               <Link to="/shop/$id" params={{ id: p.id }}>
                 <h3 className="min-h-[40px] text-[15px] font-semibold leading-snug hover:underline">{p.name}</h3>
               </Link>
-              <div className="mt-1 text-xs text-cream/55">{p.condition}</div>
+              <div className="mt-1 flex items-center justify-between text-xs text-cream/55">
+                <span>{p.condition}</span>
+                {p.lastSale && <span>Last sale {formatINR(p.lastSale)}</span>}
+              </div>
               <div className="mt-2 flex items-end justify-between gap-2">
                 <div className="font-display text-lg">{formatINR(p.price)}</div>
                 <button
