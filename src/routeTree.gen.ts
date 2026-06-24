@@ -19,6 +19,7 @@ import { Route as SellerRouteImport } from './routes/seller'
 import { Route as SellRouteImport } from './routes/sell'
 import { Route as ReturnsRouteImport } from './routes/returns'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as MeRouteImport } from './routes/me'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -29,10 +30,17 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as MeIndexRouteImport } from './routes/me.index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
 import { Route as AuctionsIndexRouteImport } from './routes/auctions.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as ShopIdRouteImport } from './routes/shop.$id'
+import { Route as MeWatchlistRouteImport } from './routes/me.watchlist'
+import { Route as MePaymentsRouteImport } from './routes/me.payments'
+import { Route as MeOrdersRouteImport } from './routes/me.orders'
+import { Route as MeNotificationsRouteImport } from './routes/me.notifications'
+import { Route as MeBidsRouteImport } from './routes/me.bids'
+import { Route as MeAddressesRouteImport } from './routes/me.addresses'
 import { Route as LiveAuctionsIdRouteImport } from './routes/live-auctions.$id'
 import { Route as DashboardSettingsRouteImport } from './routes/dashboard.settings'
 import { Route as DashboardPayoutsRouteImport } from './routes/dashboard.payouts'
@@ -40,6 +48,9 @@ import { Route as DashboardOrdersRouteImport } from './routes/dashboard.orders'
 import { Route as DashboardListingsRouteImport } from './routes/dashboard.listings'
 import { Route as DashboardAnalyticsRouteImport } from './routes/dashboard.analytics'
 import { Route as CheckoutSuccessRouteImport } from './routes/checkout.success'
+import { Route as AuthSignupRouteImport } from './routes/auth.signup'
+import { Route as AuthLoginRouteImport } from './routes/auth.login'
+import { Route as AuthForgotRouteImport } from './routes/auth.forgot'
 import { Route as AuctionsUpcomingRouteImport } from './routes/auctions.upcoming'
 import { Route as AuctionsLiveRouteImport } from './routes/auctions.live'
 import { Route as AuctionsEndingSoonRouteImport } from './routes/auctions.ending-soon'
@@ -111,6 +122,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MeRoute = MeRouteImport.update({
+  id: '/me',
+  path: '/me',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -161,6 +177,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MeIndexRoute = MeIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => MeRoute,
+} as any)
 const DashboardIndexRoute = DashboardIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -180,6 +201,36 @@ const ShopIdRoute = ShopIdRouteImport.update({
   id: '/$id',
   path: '/$id',
   getParentRoute: () => ShopRoute,
+} as any)
+const MeWatchlistRoute = MeWatchlistRouteImport.update({
+  id: '/watchlist',
+  path: '/watchlist',
+  getParentRoute: () => MeRoute,
+} as any)
+const MePaymentsRoute = MePaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => MeRoute,
+} as any)
+const MeOrdersRoute = MeOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => MeRoute,
+} as any)
+const MeNotificationsRoute = MeNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => MeRoute,
+} as any)
+const MeBidsRoute = MeBidsRouteImport.update({
+  id: '/bids',
+  path: '/bids',
+  getParentRoute: () => MeRoute,
+} as any)
+const MeAddressesRoute = MeAddressesRouteImport.update({
+  id: '/addresses',
+  path: '/addresses',
+  getParentRoute: () => MeRoute,
 } as any)
 const LiveAuctionsIdRoute = LiveAuctionsIdRouteImport.update({
   id: '/live-auctions/$id',
@@ -215,6 +266,21 @@ const CheckoutSuccessRoute = CheckoutSuccessRouteImport.update({
   id: '/success',
   path: '/success',
   getParentRoute: () => CheckoutRoute,
+} as any)
+const AuthSignupRoute = AuthSignupRouteImport.update({
+  id: '/auth/signup',
+  path: '/auth/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthLoginRoute = AuthLoginRouteImport.update({
+  id: '/auth/login',
+  path: '/auth/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthForgotRoute = AuthForgotRouteImport.update({
+  id: '/auth/forgot',
+  path: '/auth/forgot',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AuctionsUpcomingRoute = AuctionsUpcomingRouteImport.update({
   id: '/upcoming',
@@ -331,6 +397,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/login': typeof LoginRoute
+  '/me': typeof MeRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/returns': typeof ReturnsRoute
   '/sell': typeof SellRoute
@@ -356,6 +423,9 @@ export interface FileRoutesByFullPath {
   '/auctions/ending-soon': typeof AuctionsEndingSoonRoute
   '/auctions/live': typeof AuctionsLiveRoute
   '/auctions/upcoming': typeof AuctionsUpcomingRoute
+  '/auth/forgot': typeof AuthForgotRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/signup': typeof AuthSignupRoute
   '/checkout/success': typeof CheckoutSuccessRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/listings': typeof DashboardListingsRoute
@@ -363,10 +433,17 @@ export interface FileRoutesByFullPath {
   '/dashboard/payouts': typeof DashboardPayoutsRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/live-auctions/$id': typeof LiveAuctionsIdRoute
+  '/me/addresses': typeof MeAddressesRoute
+  '/me/bids': typeof MeBidsRoute
+  '/me/notifications': typeof MeNotificationsRoute
+  '/me/orders': typeof MeOrdersRoute
+  '/me/payments': typeof MePaymentsRoute
+  '/me/watchlist': typeof MeWatchlistRoute
   '/shop/$id': typeof ShopIdRoute
   '/admin/': typeof AdminIndexRoute
   '/auctions/': typeof AuctionsIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/me/': typeof MeIndexRoute
   '/dashboard/create-listing/$slug': typeof DashboardCreateListingSlugRouteWithChildren
   '/shop/brand/$slug': typeof ShopBrandSlugRoute
   '/shop/category/$slug': typeof ShopCategorySlugRoute
@@ -406,6 +483,9 @@ export interface FileRoutesByTo {
   '/auctions/ending-soon': typeof AuctionsEndingSoonRoute
   '/auctions/live': typeof AuctionsLiveRoute
   '/auctions/upcoming': typeof AuctionsUpcomingRoute
+  '/auth/forgot': typeof AuthForgotRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/signup': typeof AuthSignupRoute
   '/checkout/success': typeof CheckoutSuccessRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/listings': typeof DashboardListingsRoute
@@ -413,10 +493,17 @@ export interface FileRoutesByTo {
   '/dashboard/payouts': typeof DashboardPayoutsRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/live-auctions/$id': typeof LiveAuctionsIdRoute
+  '/me/addresses': typeof MeAddressesRoute
+  '/me/bids': typeof MeBidsRoute
+  '/me/notifications': typeof MeNotificationsRoute
+  '/me/orders': typeof MeOrdersRoute
+  '/me/payments': typeof MePaymentsRoute
+  '/me/watchlist': typeof MeWatchlistRoute
   '/shop/$id': typeof ShopIdRoute
   '/admin': typeof AdminIndexRoute
   '/auctions': typeof AuctionsIndexRoute
   '/dashboard': typeof DashboardIndexRoute
+  '/me': typeof MeIndexRoute
   '/dashboard/create-listing/$slug': typeof DashboardCreateListingSlugRouteWithChildren
   '/shop/brand/$slug': typeof ShopBrandSlugRoute
   '/shop/category/$slug': typeof ShopCategorySlugRoute
@@ -435,6 +522,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/login': typeof LoginRoute
+  '/me': typeof MeRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/returns': typeof ReturnsRoute
   '/sell': typeof SellRoute
@@ -460,6 +548,9 @@ export interface FileRoutesById {
   '/auctions/ending-soon': typeof AuctionsEndingSoonRoute
   '/auctions/live': typeof AuctionsLiveRoute
   '/auctions/upcoming': typeof AuctionsUpcomingRoute
+  '/auth/forgot': typeof AuthForgotRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/signup': typeof AuthSignupRoute
   '/checkout/success': typeof CheckoutSuccessRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/listings': typeof DashboardListingsRoute
@@ -467,10 +558,17 @@ export interface FileRoutesById {
   '/dashboard/payouts': typeof DashboardPayoutsRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/live-auctions/$id': typeof LiveAuctionsIdRoute
+  '/me/addresses': typeof MeAddressesRoute
+  '/me/bids': typeof MeBidsRoute
+  '/me/notifications': typeof MeNotificationsRoute
+  '/me/orders': typeof MeOrdersRoute
+  '/me/payments': typeof MePaymentsRoute
+  '/me/watchlist': typeof MeWatchlistRoute
   '/shop/$id': typeof ShopIdRoute
   '/admin/': typeof AdminIndexRoute
   '/auctions/': typeof AuctionsIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/me/': typeof MeIndexRoute
   '/dashboard/create-listing/$slug': typeof DashboardCreateListingSlugRouteWithChildren
   '/shop/brand/$slug': typeof ShopBrandSlugRoute
   '/shop/category/$slug': typeof ShopCategorySlugRoute
@@ -490,6 +588,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/dashboard'
     | '/login'
+    | '/me'
     | '/privacy'
     | '/returns'
     | '/sell'
@@ -515,6 +614,9 @@ export interface FileRouteTypes {
     | '/auctions/ending-soon'
     | '/auctions/live'
     | '/auctions/upcoming'
+    | '/auth/forgot'
+    | '/auth/login'
+    | '/auth/signup'
     | '/checkout/success'
     | '/dashboard/analytics'
     | '/dashboard/listings'
@@ -522,10 +624,17 @@ export interface FileRouteTypes {
     | '/dashboard/payouts'
     | '/dashboard/settings'
     | '/live-auctions/$id'
+    | '/me/addresses'
+    | '/me/bids'
+    | '/me/notifications'
+    | '/me/orders'
+    | '/me/payments'
+    | '/me/watchlist'
     | '/shop/$id'
     | '/admin/'
     | '/auctions/'
     | '/dashboard/'
+    | '/me/'
     | '/dashboard/create-listing/$slug'
     | '/shop/brand/$slug'
     | '/shop/category/$slug'
@@ -565,6 +674,9 @@ export interface FileRouteTypes {
     | '/auctions/ending-soon'
     | '/auctions/live'
     | '/auctions/upcoming'
+    | '/auth/forgot'
+    | '/auth/login'
+    | '/auth/signup'
     | '/checkout/success'
     | '/dashboard/analytics'
     | '/dashboard/listings'
@@ -572,10 +684,17 @@ export interface FileRouteTypes {
     | '/dashboard/payouts'
     | '/dashboard/settings'
     | '/live-auctions/$id'
+    | '/me/addresses'
+    | '/me/bids'
+    | '/me/notifications'
+    | '/me/orders'
+    | '/me/payments'
+    | '/me/watchlist'
     | '/shop/$id'
     | '/admin'
     | '/auctions'
     | '/dashboard'
+    | '/me'
     | '/dashboard/create-listing/$slug'
     | '/shop/brand/$slug'
     | '/shop/category/$slug'
@@ -593,6 +712,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/dashboard'
     | '/login'
+    | '/me'
     | '/privacy'
     | '/returns'
     | '/sell'
@@ -618,6 +738,9 @@ export interface FileRouteTypes {
     | '/auctions/ending-soon'
     | '/auctions/live'
     | '/auctions/upcoming'
+    | '/auth/forgot'
+    | '/auth/login'
+    | '/auth/signup'
     | '/checkout/success'
     | '/dashboard/analytics'
     | '/dashboard/listings'
@@ -625,10 +748,17 @@ export interface FileRouteTypes {
     | '/dashboard/payouts'
     | '/dashboard/settings'
     | '/live-auctions/$id'
+    | '/me/addresses'
+    | '/me/bids'
+    | '/me/notifications'
+    | '/me/orders'
+    | '/me/payments'
+    | '/me/watchlist'
     | '/shop/$id'
     | '/admin/'
     | '/auctions/'
     | '/dashboard/'
+    | '/me/'
     | '/dashboard/create-listing/$slug'
     | '/shop/brand/$slug'
     | '/shop/category/$slug'
@@ -647,6 +777,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   DashboardRoute: typeof DashboardRouteWithChildren
   LoginRoute: typeof LoginRoute
+  MeRoute: typeof MeRouteWithChildren
   PrivacyRoute: typeof PrivacyRoute
   ReturnsRoute: typeof ReturnsRoute
   SellRoute: typeof SellRoute
@@ -657,6 +788,9 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
   WishlistRoute: typeof WishlistRoute
+  AuthForgotRoute: typeof AuthForgotRoute
+  AuthLoginRoute: typeof AuthLoginRoute
+  AuthSignupRoute: typeof AuthSignupRoute
   LiveAuctionsIdRoute: typeof LiveAuctionsIdRoute
 }
 
@@ -732,6 +866,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/me': {
+      id: '/me'
+      path: '/me'
+      fullPath: '/me'
+      preLoaderRoute: typeof MeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -802,6 +943,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/me/': {
+      id: '/me/'
+      path: '/'
+      fullPath: '/me/'
+      preLoaderRoute: typeof MeIndexRouteImport
+      parentRoute: typeof MeRoute
+    }
     '/dashboard/': {
       id: '/dashboard/'
       path: '/'
@@ -829,6 +977,48 @@ declare module '@tanstack/react-router' {
       fullPath: '/shop/$id'
       preLoaderRoute: typeof ShopIdRouteImport
       parentRoute: typeof ShopRoute
+    }
+    '/me/watchlist': {
+      id: '/me/watchlist'
+      path: '/watchlist'
+      fullPath: '/me/watchlist'
+      preLoaderRoute: typeof MeWatchlistRouteImport
+      parentRoute: typeof MeRoute
+    }
+    '/me/payments': {
+      id: '/me/payments'
+      path: '/payments'
+      fullPath: '/me/payments'
+      preLoaderRoute: typeof MePaymentsRouteImport
+      parentRoute: typeof MeRoute
+    }
+    '/me/orders': {
+      id: '/me/orders'
+      path: '/orders'
+      fullPath: '/me/orders'
+      preLoaderRoute: typeof MeOrdersRouteImport
+      parentRoute: typeof MeRoute
+    }
+    '/me/notifications': {
+      id: '/me/notifications'
+      path: '/notifications'
+      fullPath: '/me/notifications'
+      preLoaderRoute: typeof MeNotificationsRouteImport
+      parentRoute: typeof MeRoute
+    }
+    '/me/bids': {
+      id: '/me/bids'
+      path: '/bids'
+      fullPath: '/me/bids'
+      preLoaderRoute: typeof MeBidsRouteImport
+      parentRoute: typeof MeRoute
+    }
+    '/me/addresses': {
+      id: '/me/addresses'
+      path: '/addresses'
+      fullPath: '/me/addresses'
+      preLoaderRoute: typeof MeAddressesRouteImport
+      parentRoute: typeof MeRoute
     }
     '/live-auctions/$id': {
       id: '/live-auctions/$id'
@@ -878,6 +1068,27 @@ declare module '@tanstack/react-router' {
       fullPath: '/checkout/success'
       preLoaderRoute: typeof CheckoutSuccessRouteImport
       parentRoute: typeof CheckoutRoute
+    }
+    '/auth/signup': {
+      id: '/auth/signup'
+      path: '/auth/signup'
+      fullPath: '/auth/signup'
+      preLoaderRoute: typeof AuthSignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/login': {
+      id: '/auth/login'
+      path: '/auth/login'
+      fullPath: '/auth/login'
+      preLoaderRoute: typeof AuthLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/forgot': {
+      id: '/auth/forgot'
+      path: '/auth/forgot'
+      fullPath: '/auth/forgot'
+      preLoaderRoute: typeof AuthForgotRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/auctions/upcoming': {
       id: '/auctions/upcoming'
@@ -1127,6 +1338,28 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
   DashboardRouteChildren,
 )
 
+interface MeRouteChildren {
+  MeAddressesRoute: typeof MeAddressesRoute
+  MeBidsRoute: typeof MeBidsRoute
+  MeNotificationsRoute: typeof MeNotificationsRoute
+  MeOrdersRoute: typeof MeOrdersRoute
+  MePaymentsRoute: typeof MePaymentsRoute
+  MeWatchlistRoute: typeof MeWatchlistRoute
+  MeIndexRoute: typeof MeIndexRoute
+}
+
+const MeRouteChildren: MeRouteChildren = {
+  MeAddressesRoute: MeAddressesRoute,
+  MeBidsRoute: MeBidsRoute,
+  MeNotificationsRoute: MeNotificationsRoute,
+  MeOrdersRoute: MeOrdersRoute,
+  MePaymentsRoute: MePaymentsRoute,
+  MeWatchlistRoute: MeWatchlistRoute,
+  MeIndexRoute: MeIndexRoute,
+}
+
+const MeRouteWithChildren = MeRoute._addFileChildren(MeRouteChildren)
+
 interface ShopRouteChildren {
   ShopIdRoute: typeof ShopIdRoute
   ShopBrandSlugRoute: typeof ShopBrandSlugRoute
@@ -1152,6 +1385,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   DashboardRoute: DashboardRouteWithChildren,
   LoginRoute: LoginRoute,
+  MeRoute: MeRouteWithChildren,
   PrivacyRoute: PrivacyRoute,
   ReturnsRoute: ReturnsRoute,
   SellRoute: SellRoute,
@@ -1162,6 +1396,9 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
   WishlistRoute: WishlistRoute,
+  AuthForgotRoute: AuthForgotRoute,
+  AuthLoginRoute: AuthLoginRoute,
+  AuthSignupRoute: AuthSignupRoute,
   LiveAuctionsIdRoute: LiveAuctionsIdRoute,
 }
 export const routeTree = rootRouteImport
