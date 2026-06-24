@@ -89,8 +89,8 @@ export function AdminHeader({ title, subtitle, action }: { title: string; subtit
   );
 }
 
-export function StatCard({ label, value, hint, tone = "ink" }: { label: string; value: string; hint?: string; tone?: "ink" | "green" | "red" | "gold" }) {
-  const toneCls = { ink: "bg-ink text-cream", green: "bg-green text-green-ink", red: "bg-red text-cream", gold: "bg-gold text-ink" }[tone];
+export function StatCard({ label, value, hint, tone = "ink" }: { label: string; value: string; hint?: string; tone?: "ink" | "green" | "red" | "gold" | "amber" }) {
+  const toneCls = { ink: "bg-ink text-cream", green: "bg-green text-green-ink", red: "bg-red text-cream", gold: "bg-gold text-ink", amber: "bg-amber-bg text-amber-ink" }[tone];
   return (
     <div className={`rounded-2xl p-5 ${toneCls}`}>
       <div className="text-[11px] font-bold uppercase tracking-[0.16em] opacity-75">{label}</div>
