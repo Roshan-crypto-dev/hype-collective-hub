@@ -11,12 +11,12 @@ export const Route = createFileRoute("/auctions")({
   component: AuctionsShell,
 });
 
-const TABS = [
+const TABS: { to: string; label: string; exact?: boolean }[] = [
   { to: "/auctions", label: "All", exact: true },
   { to: "/auctions/live", label: "Live now" },
   { to: "/auctions/upcoming", label: "Upcoming" },
   { to: "/auctions/ending-soon", label: "Ending soon" },
-] as const;
+];
 
 function AuctionsShell() {
   return (

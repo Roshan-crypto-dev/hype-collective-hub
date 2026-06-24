@@ -15,6 +15,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as ShippingRouteImport } from './routes/shipping'
+import { Route as SellerRouteImport } from './routes/seller'
 import { Route as SellRouteImport } from './routes/sell'
 import { Route as ReturnsRouteImport } from './routes/returns'
 import { Route as PrivacyRouteImport } from './routes/privacy'
@@ -23,11 +24,13 @@ import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CartRouteImport } from './routes/cart'
+import { Route as AuctionsRouteImport } from './routes/auctions'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
+import { Route as AuctionsIndexRouteImport } from './routes/auctions.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as ShopIdRouteImport } from './routes/shop.$id'
 import { Route as LiveAuctionsIdRouteImport } from './routes/live-auctions.$id'
@@ -37,6 +40,10 @@ import { Route as DashboardOrdersRouteImport } from './routes/dashboard.orders'
 import { Route as DashboardListingsRouteImport } from './routes/dashboard.listings'
 import { Route as DashboardAnalyticsRouteImport } from './routes/dashboard.analytics'
 import { Route as CheckoutSuccessRouteImport } from './routes/checkout.success'
+import { Route as AuctionsUpcomingRouteImport } from './routes/auctions.upcoming'
+import { Route as AuctionsLiveRouteImport } from './routes/auctions.live'
+import { Route as AuctionsEndingSoonRouteImport } from './routes/auctions.ending-soon'
+import { Route as AuctionsIdRouteImport } from './routes/auctions.$id'
 import { Route as AdminUsersRouteImport } from './routes/admin.users'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminSellersRouteImport } from './routes/admin.sellers'
@@ -49,6 +56,8 @@ import { Route as AdminAuthenticationRouteImport } from './routes/admin.authenti
 import { Route as AdminAuctionsRouteImport } from './routes/admin.auctions'
 import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
 import { Route as DashboardCreateListingIndexRouteImport } from './routes/dashboard.create-listing.index'
+import { Route as ShopCategorySlugRouteImport } from './routes/shop.category.$slug'
+import { Route as ShopBrandSlugRouteImport } from './routes/shop.brand.$slug'
 import { Route as DashboardCreateListingSlugRouteImport } from './routes/dashboard.create-listing.$slug'
 import { Route as DashboardCreateListingSlugDetailsRouteImport } from './routes/dashboard.create-listing.$slug.details'
 
@@ -80,6 +89,11 @@ const ShopRoute = ShopRouteImport.update({
 const ShippingRoute = ShippingRouteImport.update({
   id: '/shipping',
   path: '/shipping',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SellerRoute = SellerRouteImport.update({
+  id: '/seller',
+  path: '/seller',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SellRoute = SellRouteImport.update({
@@ -122,6 +136,11 @@ const CartRoute = CartRouteImport.update({
   path: '/cart',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuctionsRoute = AuctionsRouteImport.update({
+  id: '/auctions',
+  path: '/auctions',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
@@ -146,6 +165,11 @@ const DashboardIndexRoute = DashboardIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => DashboardRoute,
+} as any)
+const AuctionsIndexRoute = AuctionsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuctionsRoute,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
@@ -191,6 +215,26 @@ const CheckoutSuccessRoute = CheckoutSuccessRouteImport.update({
   id: '/success',
   path: '/success',
   getParentRoute: () => CheckoutRoute,
+} as any)
+const AuctionsUpcomingRoute = AuctionsUpcomingRouteImport.update({
+  id: '/upcoming',
+  path: '/upcoming',
+  getParentRoute: () => AuctionsRoute,
+} as any)
+const AuctionsLiveRoute = AuctionsLiveRouteImport.update({
+  id: '/live',
+  path: '/live',
+  getParentRoute: () => AuctionsRoute,
+} as any)
+const AuctionsEndingSoonRoute = AuctionsEndingSoonRouteImport.update({
+  id: '/ending-soon',
+  path: '/ending-soon',
+  getParentRoute: () => AuctionsRoute,
+} as any)
+const AuctionsIdRoute = AuctionsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AuctionsRoute,
 } as any)
 const AdminUsersRoute = AdminUsersRouteImport.update({
   id: '/users',
@@ -253,6 +297,16 @@ const DashboardCreateListingIndexRoute =
     path: '/create-listing/',
     getParentRoute: () => DashboardRoute,
   } as any)
+const ShopCategorySlugRoute = ShopCategorySlugRouteImport.update({
+  id: '/category/$slug',
+  path: '/category/$slug',
+  getParentRoute: () => ShopRoute,
+} as any)
+const ShopBrandSlugRoute = ShopBrandSlugRouteImport.update({
+  id: '/brand/$slug',
+  path: '/brand/$slug',
+  getParentRoute: () => ShopRoute,
+} as any)
 const DashboardCreateListingSlugRoute =
   DashboardCreateListingSlugRouteImport.update({
     id: '/create-listing/$slug',
@@ -271,6 +325,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/account': typeof AccountRoute
   '/admin': typeof AdminRouteWithChildren
+  '/auctions': typeof AuctionsRouteWithChildren
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRouteWithChildren
   '/contact': typeof ContactRoute
@@ -279,6 +334,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/returns': typeof ReturnsRoute
   '/sell': typeof SellRoute
+  '/seller': typeof SellerRoute
   '/shipping': typeof ShippingRoute
   '/shop': typeof ShopRouteWithChildren
   '/signup': typeof SignupRoute
@@ -296,6 +352,10 @@ export interface FileRoutesByFullPath {
   '/admin/sellers': typeof AdminSellersRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
+  '/auctions/$id': typeof AuctionsIdRoute
+  '/auctions/ending-soon': typeof AuctionsEndingSoonRoute
+  '/auctions/live': typeof AuctionsLiveRoute
+  '/auctions/upcoming': typeof AuctionsUpcomingRoute
   '/checkout/success': typeof CheckoutSuccessRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/listings': typeof DashboardListingsRoute
@@ -305,8 +365,11 @@ export interface FileRoutesByFullPath {
   '/live-auctions/$id': typeof LiveAuctionsIdRoute
   '/shop/$id': typeof ShopIdRoute
   '/admin/': typeof AdminIndexRoute
+  '/auctions/': typeof AuctionsIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/dashboard/create-listing/$slug': typeof DashboardCreateListingSlugRouteWithChildren
+  '/shop/brand/$slug': typeof ShopBrandSlugRoute
+  '/shop/category/$slug': typeof ShopCategorySlugRoute
   '/dashboard/create-listing/': typeof DashboardCreateListingIndexRoute
   '/dashboard/create-listing/$slug/details': typeof DashboardCreateListingSlugDetailsRoute
 }
@@ -321,6 +384,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/returns': typeof ReturnsRoute
   '/sell': typeof SellRoute
+  '/seller': typeof SellerRoute
   '/shipping': typeof ShippingRoute
   '/shop': typeof ShopRouteWithChildren
   '/signup': typeof SignupRoute
@@ -338,6 +402,10 @@ export interface FileRoutesByTo {
   '/admin/sellers': typeof AdminSellersRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
+  '/auctions/$id': typeof AuctionsIdRoute
+  '/auctions/ending-soon': typeof AuctionsEndingSoonRoute
+  '/auctions/live': typeof AuctionsLiveRoute
+  '/auctions/upcoming': typeof AuctionsUpcomingRoute
   '/checkout/success': typeof CheckoutSuccessRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/listings': typeof DashboardListingsRoute
@@ -347,8 +415,11 @@ export interface FileRoutesByTo {
   '/live-auctions/$id': typeof LiveAuctionsIdRoute
   '/shop/$id': typeof ShopIdRoute
   '/admin': typeof AdminIndexRoute
+  '/auctions': typeof AuctionsIndexRoute
   '/dashboard': typeof DashboardIndexRoute
   '/dashboard/create-listing/$slug': typeof DashboardCreateListingSlugRouteWithChildren
+  '/shop/brand/$slug': typeof ShopBrandSlugRoute
+  '/shop/category/$slug': typeof ShopCategorySlugRoute
   '/dashboard/create-listing': typeof DashboardCreateListingIndexRoute
   '/dashboard/create-listing/$slug/details': typeof DashboardCreateListingSlugDetailsRoute
 }
@@ -358,6 +429,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/account': typeof AccountRoute
   '/admin': typeof AdminRouteWithChildren
+  '/auctions': typeof AuctionsRouteWithChildren
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRouteWithChildren
   '/contact': typeof ContactRoute
@@ -366,6 +438,7 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/returns': typeof ReturnsRoute
   '/sell': typeof SellRoute
+  '/seller': typeof SellerRoute
   '/shipping': typeof ShippingRoute
   '/shop': typeof ShopRouteWithChildren
   '/signup': typeof SignupRoute
@@ -383,6 +456,10 @@ export interface FileRoutesById {
   '/admin/sellers': typeof AdminSellersRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
+  '/auctions/$id': typeof AuctionsIdRoute
+  '/auctions/ending-soon': typeof AuctionsEndingSoonRoute
+  '/auctions/live': typeof AuctionsLiveRoute
+  '/auctions/upcoming': typeof AuctionsUpcomingRoute
   '/checkout/success': typeof CheckoutSuccessRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/listings': typeof DashboardListingsRoute
@@ -392,8 +469,11 @@ export interface FileRoutesById {
   '/live-auctions/$id': typeof LiveAuctionsIdRoute
   '/shop/$id': typeof ShopIdRoute
   '/admin/': typeof AdminIndexRoute
+  '/auctions/': typeof AuctionsIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/dashboard/create-listing/$slug': typeof DashboardCreateListingSlugRouteWithChildren
+  '/shop/brand/$slug': typeof ShopBrandSlugRoute
+  '/shop/category/$slug': typeof ShopCategorySlugRoute
   '/dashboard/create-listing/': typeof DashboardCreateListingIndexRoute
   '/dashboard/create-listing/$slug/details': typeof DashboardCreateListingSlugDetailsRoute
 }
@@ -404,6 +484,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/account'
     | '/admin'
+    | '/auctions'
     | '/cart'
     | '/checkout'
     | '/contact'
@@ -412,6 +493,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/returns'
     | '/sell'
+    | '/seller'
     | '/shipping'
     | '/shop'
     | '/signup'
@@ -429,6 +511,10 @@ export interface FileRouteTypes {
     | '/admin/sellers'
     | '/admin/settings'
     | '/admin/users'
+    | '/auctions/$id'
+    | '/auctions/ending-soon'
+    | '/auctions/live'
+    | '/auctions/upcoming'
     | '/checkout/success'
     | '/dashboard/analytics'
     | '/dashboard/listings'
@@ -438,8 +524,11 @@ export interface FileRouteTypes {
     | '/live-auctions/$id'
     | '/shop/$id'
     | '/admin/'
+    | '/auctions/'
     | '/dashboard/'
     | '/dashboard/create-listing/$slug'
+    | '/shop/brand/$slug'
+    | '/shop/category/$slug'
     | '/dashboard/create-listing/'
     | '/dashboard/create-listing/$slug/details'
   fileRoutesByTo: FileRoutesByTo
@@ -454,6 +543,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/returns'
     | '/sell'
+    | '/seller'
     | '/shipping'
     | '/shop'
     | '/signup'
@@ -471,6 +561,10 @@ export interface FileRouteTypes {
     | '/admin/sellers'
     | '/admin/settings'
     | '/admin/users'
+    | '/auctions/$id'
+    | '/auctions/ending-soon'
+    | '/auctions/live'
+    | '/auctions/upcoming'
     | '/checkout/success'
     | '/dashboard/analytics'
     | '/dashboard/listings'
@@ -480,8 +574,11 @@ export interface FileRouteTypes {
     | '/live-auctions/$id'
     | '/shop/$id'
     | '/admin'
+    | '/auctions'
     | '/dashboard'
     | '/dashboard/create-listing/$slug'
+    | '/shop/brand/$slug'
+    | '/shop/category/$slug'
     | '/dashboard/create-listing'
     | '/dashboard/create-listing/$slug/details'
   id:
@@ -490,6 +587,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/account'
     | '/admin'
+    | '/auctions'
     | '/cart'
     | '/checkout'
     | '/contact'
@@ -498,6 +596,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/returns'
     | '/sell'
+    | '/seller'
     | '/shipping'
     | '/shop'
     | '/signup'
@@ -515,6 +614,10 @@ export interface FileRouteTypes {
     | '/admin/sellers'
     | '/admin/settings'
     | '/admin/users'
+    | '/auctions/$id'
+    | '/auctions/ending-soon'
+    | '/auctions/live'
+    | '/auctions/upcoming'
     | '/checkout/success'
     | '/dashboard/analytics'
     | '/dashboard/listings'
@@ -524,8 +627,11 @@ export interface FileRouteTypes {
     | '/live-auctions/$id'
     | '/shop/$id'
     | '/admin/'
+    | '/auctions/'
     | '/dashboard/'
     | '/dashboard/create-listing/$slug'
+    | '/shop/brand/$slug'
+    | '/shop/category/$slug'
     | '/dashboard/create-listing/'
     | '/dashboard/create-listing/$slug/details'
   fileRoutesById: FileRoutesById
@@ -535,6 +641,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AccountRoute: typeof AccountRoute
   AdminRoute: typeof AdminRouteWithChildren
+  AuctionsRoute: typeof AuctionsRouteWithChildren
   CartRoute: typeof CartRoute
   CheckoutRoute: typeof CheckoutRouteWithChildren
   ContactRoute: typeof ContactRoute
@@ -543,6 +650,7 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   ReturnsRoute: typeof ReturnsRoute
   SellRoute: typeof SellRoute
+  SellerRoute: typeof SellerRoute
   ShippingRoute: typeof ShippingRoute
   ShopRoute: typeof ShopRouteWithChildren
   SignupRoute: typeof SignupRoute
@@ -594,6 +702,13 @@ declare module '@tanstack/react-router' {
       path: '/shipping'
       fullPath: '/shipping'
       preLoaderRoute: typeof ShippingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/seller': {
+      id: '/seller'
+      path: '/seller'
+      fullPath: '/seller'
+      preLoaderRoute: typeof SellerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sell': {
@@ -652,6 +767,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CartRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auctions': {
+      id: '/auctions'
+      path: '/auctions'
+      fullPath: '/auctions'
+      preLoaderRoute: typeof AuctionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin': {
       id: '/admin'
       path: '/admin'
@@ -686,6 +808,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/dashboard/'
       preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof DashboardRoute
+    }
+    '/auctions/': {
+      id: '/auctions/'
+      path: '/'
+      fullPath: '/auctions/'
+      preLoaderRoute: typeof AuctionsIndexRouteImport
+      parentRoute: typeof AuctionsRoute
     }
     '/admin/': {
       id: '/admin/'
@@ -749,6 +878,34 @@ declare module '@tanstack/react-router' {
       fullPath: '/checkout/success'
       preLoaderRoute: typeof CheckoutSuccessRouteImport
       parentRoute: typeof CheckoutRoute
+    }
+    '/auctions/upcoming': {
+      id: '/auctions/upcoming'
+      path: '/upcoming'
+      fullPath: '/auctions/upcoming'
+      preLoaderRoute: typeof AuctionsUpcomingRouteImport
+      parentRoute: typeof AuctionsRoute
+    }
+    '/auctions/live': {
+      id: '/auctions/live'
+      path: '/live'
+      fullPath: '/auctions/live'
+      preLoaderRoute: typeof AuctionsLiveRouteImport
+      parentRoute: typeof AuctionsRoute
+    }
+    '/auctions/ending-soon': {
+      id: '/auctions/ending-soon'
+      path: '/ending-soon'
+      fullPath: '/auctions/ending-soon'
+      preLoaderRoute: typeof AuctionsEndingSoonRouteImport
+      parentRoute: typeof AuctionsRoute
+    }
+    '/auctions/$id': {
+      id: '/auctions/$id'
+      path: '/$id'
+      fullPath: '/auctions/$id'
+      preLoaderRoute: typeof AuctionsIdRouteImport
+      parentRoute: typeof AuctionsRoute
     }
     '/admin/users': {
       id: '/admin/users'
@@ -834,6 +991,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardCreateListingIndexRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/shop/category/$slug': {
+      id: '/shop/category/$slug'
+      path: '/category/$slug'
+      fullPath: '/shop/category/$slug'
+      preLoaderRoute: typeof ShopCategorySlugRouteImport
+      parentRoute: typeof ShopRoute
+    }
+    '/shop/brand/$slug': {
+      id: '/shop/brand/$slug'
+      path: '/brand/$slug'
+      fullPath: '/shop/brand/$slug'
+      preLoaderRoute: typeof ShopBrandSlugRouteImport
+      parentRoute: typeof ShopRoute
+    }
     '/dashboard/create-listing/$slug': {
       id: '/dashboard/create-listing/$slug'
       path: '/create-listing/$slug'
@@ -882,6 +1053,26 @@ const AdminRouteChildren: AdminRouteChildren = {
 }
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
+interface AuctionsRouteChildren {
+  AuctionsIdRoute: typeof AuctionsIdRoute
+  AuctionsEndingSoonRoute: typeof AuctionsEndingSoonRoute
+  AuctionsLiveRoute: typeof AuctionsLiveRoute
+  AuctionsUpcomingRoute: typeof AuctionsUpcomingRoute
+  AuctionsIndexRoute: typeof AuctionsIndexRoute
+}
+
+const AuctionsRouteChildren: AuctionsRouteChildren = {
+  AuctionsIdRoute: AuctionsIdRoute,
+  AuctionsEndingSoonRoute: AuctionsEndingSoonRoute,
+  AuctionsLiveRoute: AuctionsLiveRoute,
+  AuctionsUpcomingRoute: AuctionsUpcomingRoute,
+  AuctionsIndexRoute: AuctionsIndexRoute,
+}
+
+const AuctionsRouteWithChildren = AuctionsRoute._addFileChildren(
+  AuctionsRouteChildren,
+)
 
 interface CheckoutRouteChildren {
   CheckoutSuccessRoute: typeof CheckoutSuccessRoute
@@ -938,10 +1129,14 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
 
 interface ShopRouteChildren {
   ShopIdRoute: typeof ShopIdRoute
+  ShopBrandSlugRoute: typeof ShopBrandSlugRoute
+  ShopCategorySlugRoute: typeof ShopCategorySlugRoute
 }
 
 const ShopRouteChildren: ShopRouteChildren = {
   ShopIdRoute: ShopIdRoute,
+  ShopBrandSlugRoute: ShopBrandSlugRoute,
+  ShopCategorySlugRoute: ShopCategorySlugRoute,
 }
 
 const ShopRouteWithChildren = ShopRoute._addFileChildren(ShopRouteChildren)
@@ -951,6 +1146,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   AccountRoute: AccountRoute,
   AdminRoute: AdminRouteWithChildren,
+  AuctionsRoute: AuctionsRouteWithChildren,
   CartRoute: CartRoute,
   CheckoutRoute: CheckoutRouteWithChildren,
   ContactRoute: ContactRoute,
@@ -959,6 +1155,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   ReturnsRoute: ReturnsRoute,
   SellRoute: SellRoute,
+  SellerRoute: SellerRoute,
   ShippingRoute: ShippingRoute,
   ShopRoute: ShopRouteWithChildren,
   SignupRoute: SignupRoute,
