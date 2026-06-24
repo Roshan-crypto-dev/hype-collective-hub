@@ -23,10 +23,12 @@ import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CartRouteImport } from './routes/cart'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as ShopIdRouteImport } from './routes/shop.$id'
 import { Route as LiveAuctionsIdRouteImport } from './routes/live-auctions.$id'
 import { Route as DashboardSettingsRouteImport } from './routes/dashboard.settings'
@@ -35,6 +37,17 @@ import { Route as DashboardOrdersRouteImport } from './routes/dashboard.orders'
 import { Route as DashboardListingsRouteImport } from './routes/dashboard.listings'
 import { Route as DashboardAnalyticsRouteImport } from './routes/dashboard.analytics'
 import { Route as CheckoutSuccessRouteImport } from './routes/checkout.success'
+import { Route as AdminUsersRouteImport } from './routes/admin.users'
+import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
+import { Route as AdminSellersRouteImport } from './routes/admin.sellers'
+import { Route as AdminProductsRouteImport } from './routes/admin.products'
+import { Route as AdminPayoutsRouteImport } from './routes/admin.payouts'
+import { Route as AdminOrdersRouteImport } from './routes/admin.orders'
+import { Route as AdminModerationRouteImport } from './routes/admin.moderation'
+import { Route as AdminDisputesRouteImport } from './routes/admin.disputes'
+import { Route as AdminAuthenticationRouteImport } from './routes/admin.authentication'
+import { Route as AdminAuctionsRouteImport } from './routes/admin.auctions'
+import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
 import { Route as DashboardCreateListingIndexRouteImport } from './routes/dashboard.create-listing.index'
 import { Route as DashboardCreateListingSlugRouteImport } from './routes/dashboard.create-listing.$slug'
 import { Route as DashboardCreateListingSlugDetailsRouteImport } from './routes/dashboard.create-listing.$slug.details'
@@ -109,6 +122,11 @@ const CartRoute = CartRouteImport.update({
   path: '/cart',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AccountRoute = AccountRouteImport.update({
   id: '/account',
   path: '/account',
@@ -128,6 +146,11 @@ const DashboardIndexRoute = DashboardIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => DashboardRoute,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
 } as any)
 const ShopIdRoute = ShopIdRouteImport.update({
   id: '/$id',
@@ -169,6 +192,61 @@ const CheckoutSuccessRoute = CheckoutSuccessRouteImport.update({
   path: '/success',
   getParentRoute: () => CheckoutRoute,
 } as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSellersRoute = AdminSellersRouteImport.update({
+  id: '/sellers',
+  path: '/sellers',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminProductsRoute = AdminProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPayoutsRoute = AdminPayoutsRouteImport.update({
+  id: '/payouts',
+  path: '/payouts',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminOrdersRoute = AdminOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminModerationRoute = AdminModerationRouteImport.update({
+  id: '/moderation',
+  path: '/moderation',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminDisputesRoute = AdminDisputesRouteImport.update({
+  id: '/disputes',
+  path: '/disputes',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAuthenticationRoute = AdminAuthenticationRouteImport.update({
+  id: '/authentication',
+  path: '/authentication',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAuctionsRoute = AdminAuctionsRouteImport.update({
+  id: '/auctions',
+  path: '/auctions',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAnalyticsRoute = AdminAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => AdminRoute,
+} as any)
 const DashboardCreateListingIndexRoute =
   DashboardCreateListingIndexRouteImport.update({
     id: '/create-listing/',
@@ -192,6 +270,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/account': typeof AccountRoute
+  '/admin': typeof AdminRouteWithChildren
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRouteWithChildren
   '/contact': typeof ContactRoute
@@ -206,6 +285,17 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/wishlist': typeof WishlistRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/auctions': typeof AdminAuctionsRoute
+  '/admin/authentication': typeof AdminAuthenticationRoute
+  '/admin/disputes': typeof AdminDisputesRoute
+  '/admin/moderation': typeof AdminModerationRoute
+  '/admin/orders': typeof AdminOrdersRoute
+  '/admin/payouts': typeof AdminPayoutsRoute
+  '/admin/products': typeof AdminProductsRoute
+  '/admin/sellers': typeof AdminSellersRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/users': typeof AdminUsersRoute
   '/checkout/success': typeof CheckoutSuccessRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/listings': typeof DashboardListingsRoute
@@ -214,6 +304,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/live-auctions/$id': typeof LiveAuctionsIdRoute
   '/shop/$id': typeof ShopIdRoute
+  '/admin/': typeof AdminIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/dashboard/create-listing/$slug': typeof DashboardCreateListingSlugRouteWithChildren
   '/dashboard/create-listing/': typeof DashboardCreateListingIndexRoute
@@ -236,6 +327,17 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/wishlist': typeof WishlistRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/auctions': typeof AdminAuctionsRoute
+  '/admin/authentication': typeof AdminAuthenticationRoute
+  '/admin/disputes': typeof AdminDisputesRoute
+  '/admin/moderation': typeof AdminModerationRoute
+  '/admin/orders': typeof AdminOrdersRoute
+  '/admin/payouts': typeof AdminPayoutsRoute
+  '/admin/products': typeof AdminProductsRoute
+  '/admin/sellers': typeof AdminSellersRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/users': typeof AdminUsersRoute
   '/checkout/success': typeof CheckoutSuccessRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/listings': typeof DashboardListingsRoute
@@ -244,6 +346,7 @@ export interface FileRoutesByTo {
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/live-auctions/$id': typeof LiveAuctionsIdRoute
   '/shop/$id': typeof ShopIdRoute
+  '/admin': typeof AdminIndexRoute
   '/dashboard': typeof DashboardIndexRoute
   '/dashboard/create-listing/$slug': typeof DashboardCreateListingSlugRouteWithChildren
   '/dashboard/create-listing': typeof DashboardCreateListingIndexRoute
@@ -254,6 +357,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/account': typeof AccountRoute
+  '/admin': typeof AdminRouteWithChildren
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRouteWithChildren
   '/contact': typeof ContactRoute
@@ -268,6 +372,17 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/wishlist': typeof WishlistRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/auctions': typeof AdminAuctionsRoute
+  '/admin/authentication': typeof AdminAuthenticationRoute
+  '/admin/disputes': typeof AdminDisputesRoute
+  '/admin/moderation': typeof AdminModerationRoute
+  '/admin/orders': typeof AdminOrdersRoute
+  '/admin/payouts': typeof AdminPayoutsRoute
+  '/admin/products': typeof AdminProductsRoute
+  '/admin/sellers': typeof AdminSellersRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/users': typeof AdminUsersRoute
   '/checkout/success': typeof CheckoutSuccessRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/listings': typeof DashboardListingsRoute
@@ -276,6 +391,7 @@ export interface FileRoutesById {
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/live-auctions/$id': typeof LiveAuctionsIdRoute
   '/shop/$id': typeof ShopIdRoute
+  '/admin/': typeof AdminIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/dashboard/create-listing/$slug': typeof DashboardCreateListingSlugRouteWithChildren
   '/dashboard/create-listing/': typeof DashboardCreateListingIndexRoute
@@ -287,6 +403,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/account'
+    | '/admin'
     | '/cart'
     | '/checkout'
     | '/contact'
@@ -301,6 +418,17 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/wishlist'
+    | '/admin/analytics'
+    | '/admin/auctions'
+    | '/admin/authentication'
+    | '/admin/disputes'
+    | '/admin/moderation'
+    | '/admin/orders'
+    | '/admin/payouts'
+    | '/admin/products'
+    | '/admin/sellers'
+    | '/admin/settings'
+    | '/admin/users'
     | '/checkout/success'
     | '/dashboard/analytics'
     | '/dashboard/listings'
@@ -309,6 +437,7 @@ export interface FileRouteTypes {
     | '/dashboard/settings'
     | '/live-auctions/$id'
     | '/shop/$id'
+    | '/admin/'
     | '/dashboard/'
     | '/dashboard/create-listing/$slug'
     | '/dashboard/create-listing/'
@@ -331,6 +460,17 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/wishlist'
+    | '/admin/analytics'
+    | '/admin/auctions'
+    | '/admin/authentication'
+    | '/admin/disputes'
+    | '/admin/moderation'
+    | '/admin/orders'
+    | '/admin/payouts'
+    | '/admin/products'
+    | '/admin/sellers'
+    | '/admin/settings'
+    | '/admin/users'
     | '/checkout/success'
     | '/dashboard/analytics'
     | '/dashboard/listings'
@@ -339,6 +479,7 @@ export interface FileRouteTypes {
     | '/dashboard/settings'
     | '/live-auctions/$id'
     | '/shop/$id'
+    | '/admin'
     | '/dashboard'
     | '/dashboard/create-listing/$slug'
     | '/dashboard/create-listing'
@@ -348,6 +489,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/account'
+    | '/admin'
     | '/cart'
     | '/checkout'
     | '/contact'
@@ -362,6 +504,17 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/wishlist'
+    | '/admin/analytics'
+    | '/admin/auctions'
+    | '/admin/authentication'
+    | '/admin/disputes'
+    | '/admin/moderation'
+    | '/admin/orders'
+    | '/admin/payouts'
+    | '/admin/products'
+    | '/admin/sellers'
+    | '/admin/settings'
+    | '/admin/users'
     | '/checkout/success'
     | '/dashboard/analytics'
     | '/dashboard/listings'
@@ -370,6 +523,7 @@ export interface FileRouteTypes {
     | '/dashboard/settings'
     | '/live-auctions/$id'
     | '/shop/$id'
+    | '/admin/'
     | '/dashboard/'
     | '/dashboard/create-listing/$slug'
     | '/dashboard/create-listing/'
@@ -380,6 +534,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AccountRoute: typeof AccountRoute
+  AdminRoute: typeof AdminRouteWithChildren
   CartRoute: typeof CartRoute
   CheckoutRoute: typeof CheckoutRouteWithChildren
   ContactRoute: typeof ContactRoute
@@ -497,6 +652,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CartRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/account': {
       id: '/account'
       path: '/account'
@@ -524,6 +686,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/dashboard/'
       preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof DashboardRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
     }
     '/shop/$id': {
       id: '/shop/$id'
@@ -581,6 +750,83 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CheckoutSuccessRouteImport
       parentRoute: typeof CheckoutRoute
     }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/sellers': {
+      id: '/admin/sellers'
+      path: '/sellers'
+      fullPath: '/admin/sellers'
+      preLoaderRoute: typeof AdminSellersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/products': {
+      id: '/admin/products'
+      path: '/products'
+      fullPath: '/admin/products'
+      preLoaderRoute: typeof AdminProductsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/payouts': {
+      id: '/admin/payouts'
+      path: '/payouts'
+      fullPath: '/admin/payouts'
+      preLoaderRoute: typeof AdminPayoutsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/orders': {
+      id: '/admin/orders'
+      path: '/orders'
+      fullPath: '/admin/orders'
+      preLoaderRoute: typeof AdminOrdersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/moderation': {
+      id: '/admin/moderation'
+      path: '/moderation'
+      fullPath: '/admin/moderation'
+      preLoaderRoute: typeof AdminModerationRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/disputes': {
+      id: '/admin/disputes'
+      path: '/disputes'
+      fullPath: '/admin/disputes'
+      preLoaderRoute: typeof AdminDisputesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/authentication': {
+      id: '/admin/authentication'
+      path: '/authentication'
+      fullPath: '/admin/authentication'
+      preLoaderRoute: typeof AdminAuthenticationRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/auctions': {
+      id: '/admin/auctions'
+      path: '/auctions'
+      fullPath: '/admin/auctions'
+      preLoaderRoute: typeof AdminAuctionsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/analytics': {
+      id: '/admin/analytics'
+      path: '/analytics'
+      fullPath: '/admin/analytics'
+      preLoaderRoute: typeof AdminAnalyticsRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/dashboard/create-listing/': {
       id: '/dashboard/create-listing/'
       path: '/create-listing'
@@ -604,6 +850,38 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface AdminRouteChildren {
+  AdminAnalyticsRoute: typeof AdminAnalyticsRoute
+  AdminAuctionsRoute: typeof AdminAuctionsRoute
+  AdminAuthenticationRoute: typeof AdminAuthenticationRoute
+  AdminDisputesRoute: typeof AdminDisputesRoute
+  AdminModerationRoute: typeof AdminModerationRoute
+  AdminOrdersRoute: typeof AdminOrdersRoute
+  AdminPayoutsRoute: typeof AdminPayoutsRoute
+  AdminProductsRoute: typeof AdminProductsRoute
+  AdminSellersRoute: typeof AdminSellersRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminUsersRoute: typeof AdminUsersRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminAnalyticsRoute: AdminAnalyticsRoute,
+  AdminAuctionsRoute: AdminAuctionsRoute,
+  AdminAuthenticationRoute: AdminAuthenticationRoute,
+  AdminDisputesRoute: AdminDisputesRoute,
+  AdminModerationRoute: AdminModerationRoute,
+  AdminOrdersRoute: AdminOrdersRoute,
+  AdminPayoutsRoute: AdminPayoutsRoute,
+  AdminProductsRoute: AdminProductsRoute,
+  AdminSellersRoute: AdminSellersRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
+  AdminUsersRoute: AdminUsersRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface CheckoutRouteChildren {
   CheckoutSuccessRoute: typeof CheckoutSuccessRoute
@@ -672,6 +950,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AccountRoute: AccountRoute,
+  AdminRoute: AdminRouteWithChildren,
   CartRoute: CartRoute,
   CheckoutRoute: CheckoutRouteWithChildren,
   ContactRoute: ContactRoute,
