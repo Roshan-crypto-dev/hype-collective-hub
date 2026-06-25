@@ -12,7 +12,7 @@ type Status = "Active" | "Draft" | "Sold" | "Paused";
 
 const rows: Array<{ id: string; title: string; img: string; price: number; status: Status; views: number; watch: number; updated: string }> = shopItems.slice(0, 8).map((s, i) => ({
   id: s.id,
-  title: s.title,
+  title: s.name,
   img: s.image,
   price: s.price,
   status: (["Active", "Active", "Draft", "Active", "Sold", "Paused", "Active", "Active"] as Status[])[i],
