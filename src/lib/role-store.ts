@@ -21,19 +21,26 @@ const DISPLAY: Record<Role, { name: string; initials: string }> = {
 };
 
 export function RoleProvider({ children }: { children: ReactNode }) {
-  const [role, setRoleState] = useState<Role>(() => {
-    if (typeof window === "undefined") return "guest";
-    try {
-      const v = window.localStorage.getItem(KEY) as Role | null;
-      return v && ["guest", "buyer", "seller", "admin"].includes(v) ? v : "guest";
-    } catch {
-      return "guest";
-    }
-  });
+  // Always start as "guest" on both server and first client render to avoid
+  // hydration mismatches. Real role hydrates from localStorage in effect.
+  const [role, setRoleState] = useState<Role>("guest");
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== "undefined") window.localStorage.setItem(KEY, role);
-  }, [role]);
+    try {
+      const v = window.localStorage.getItem(KEY) as Role | null;
+      if (v && ["guest", "buyer", "seller", "admin"].includes(v)) setRoleState(v);
+    } catch {
+      /* ignore */
+    }
+    setHydrated(true);
+  }, []);
+
+  useEffect(() => {
+    if (hydrated) {
+      try { window.localStorage.setItem(KEY, role); } catch { /* ignore */ }
+    }
+  }, [role, hydrated]);
 
   const setRole = useCallback((r: Role) => setRoleState(r), []);
 
