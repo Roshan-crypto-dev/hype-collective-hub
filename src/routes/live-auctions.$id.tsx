@@ -19,11 +19,11 @@ export const Route = createFileRoute("/live-auctions/$id")({
 function AuctionPage() {
   return (
     <SiteLayout>
-      <div className="bg-cream/60 px-8 py-5 text-sm text-ink/70">
-        <div className="mx-auto max-w-[1440px]">
+      <div className="bg-cream/60 px-4 py-5 text-sm text-ink/70 sm:px-8">
+        <div className="mx-auto max-w-[1440px] overflow-x-auto whitespace-nowrap">
           <Link to="/" className="hover:underline">Home</Link>
           <span className="mx-2 opacity-50">/</span>
-          <span>Live Auctions</span>
+          <Link to="/auctions/live" className="hover:underline">Live Auctions</Link>
           <span className="mx-2 opacity-50">/</span>
           <span>Sneakers</span>
           <span className="mx-2 opacity-50">/</span>
@@ -32,7 +32,7 @@ function AuctionPage() {
       </div>
 
       <div className="bg-sand">
-        <div className="mx-auto max-w-[1440px] px-8 py-10">
+        <div className="mx-auto max-w-[1440px] px-4 py-8 sm:px-8 sm:py-10">
           <HeroBlock />
           <DetailBlock />
           <Related />
@@ -56,7 +56,7 @@ function HeroBlock() {
         <span className="inline-flex items-center gap-1.5 rounded-full bg-green px-3 py-1 text-xs font-bold text-green-ink">
           <span className="h-1.5 w-1.5 rounded-full bg-green-ink" /> LIVE
         </span>
-        <h1 className="mt-4 font-display text-[46px] leading-[0.98] tracking-[-0.02em]">
+        <h1 className="mt-4 font-display text-[34px] leading-[0.98] tracking-[-0.02em] sm:text-[46px]">
           Air Jordan 1<br />Retro High OG<br />'Chicago'
         </h1>
         <div className="mt-4 flex items-center gap-3 text-sm font-semibold">
@@ -68,7 +68,7 @@ function HeroBlock() {
         <div className="mt-4 border-y border-line py-3 text-sm text-ink/65">
           <b className="text-ink">Condition:</b> DS &nbsp;|&nbsp; <b className="text-ink">Size:</b> UK 9 / US 10
         </div>
-        <div className="mt-4 flex items-center gap-6 text-sm text-ink/65">
+        <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-ink/65">
           <span><b className="text-ink">Current Bid</b></span>
           <span className="inline-flex items-center gap-1.5"><Eye size={14} /> 1,425 Watching</span>
           <span className="inline-flex items-center gap-1.5"><Users size={14} /> 460 Active bidders</span>
@@ -76,14 +76,14 @@ function HeroBlock() {
         <div className="mt-2.5 text-base font-bold text-green-ink">+ ₹500 <span className="block text-xs font-medium text-muted-fg">Next minimum bid</span></div>
         <div className="mt-6">
           <div className="text-xs font-semibold uppercase tracking-[0.06em] text-ink/65">Ends In</div>
-          <div className="mt-1 font-display text-[52px] leading-none tracking-[0.02em] text-red">00 : 14 : 21</div>
+          <div className="mt-1 font-display text-[40px] leading-none tracking-[0.02em] text-red sm:text-[52px]">00 : 14 : 21</div>
         </div>
       </div>
 
-      <div className="rounded-3xl bg-cream p-8">
+      <div className="rounded-3xl bg-cream p-6 sm:p-8">
         <h3 className="mb-4 text-base font-semibold">Place Your Bid</h3>
-        <div className="mb-2 flex items-center justify-between">
-          <span className="font-display text-[44px] leading-none tracking-[-0.02em]">₹28,800</span>
+        <div className="mb-2 flex items-center justify-between gap-3">
+          <span className="font-display text-[36px] leading-none tracking-[-0.02em] sm:text-[44px]">₹28,800</span>
           <div className="flex gap-2.5">
             <button className="grid h-12 w-12 place-items-center rounded-xl border border-line bg-white"><Minus size={18} /></button>
             <button className="grid h-12 w-12 place-items-center rounded-xl border border-line bg-white"><Plus size={18} /></button>
@@ -113,7 +113,7 @@ function HeroBlock() {
 
 function DetailBlock() {
   return (
-    <div className="grid grid-cols-1 gap-9 rounded-3xl bg-cream p-9 lg:grid-cols-[1fr_1.2fr_1fr]">
+    <div className="grid grid-cols-1 gap-9 rounded-3xl bg-cream p-5 sm:p-9 lg:grid-cols-[1fr_1.2fr_1fr]">
       {/* Details */}
       <div>
         <h4 className="mb-4 flex items-center gap-1.5 text-sm font-bold">Details <Info size={13} className="opacity-50" /></h4>
@@ -235,7 +235,7 @@ function Related() {
   const items = liveAuctions.slice(0, 4);
   return (
     <section className="mt-16">
-      <h2 className="mb-9 text-center font-display text-[44px] tracking-[-0.02em]">You May Also Like</h2>
+      <h2 className="mb-9 text-center font-display text-3xl tracking-[-0.02em] sm:text-[44px]">You May Also Like</h2>
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {items.map((a) => (
           <Link key={a.id} to="/live-auctions/$id" params={{ id: a.id }} className="overflow-hidden rounded-2xl border border-line-soft bg-cream">
