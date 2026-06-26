@@ -38,15 +38,23 @@ function load<T>(key: string, fallback: T): T {
 }
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [cart, setCart] = useState<CartLine[]>(() => load<CartLine[]>(CART_KEY, []));
-  const [wishlist, setWishlist] = useState<string[]>(() => load<string[]>(WISH_KEY, []));
+  // Start empty on server and first client render to avoid hydration mismatch.
+  const [cart, setCart] = useState<CartLine[]>([]);
+  const [wishlist, setWishlist] = useState<string[]>([]);
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== "undefined") window.localStorage.setItem(CART_KEY, JSON.stringify(cart));
-  }, [cart]);
+    setCart(load<CartLine[]>(CART_KEY, []));
+    setWishlist(load<string[]>(WISH_KEY, []));
+    setHydrated(true);
+  }, []);
+
   useEffect(() => {
-    if (typeof window !== "undefined") window.localStorage.setItem(WISH_KEY, JSON.stringify(wishlist));
-  }, [wishlist]);
+    if (hydrated && typeof window !== "undefined") window.localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  }, [cart, hydrated]);
+  useEffect(() => {
+    if (hydrated && typeof window !== "undefined") window.localStorage.setItem(WISH_KEY, JSON.stringify(wishlist));
+  }, [wishlist, hydrated]);
 
   const addToCart = useCallback<CartCtx["addToCart"]>((line) => {
     setCart((prev) => {
