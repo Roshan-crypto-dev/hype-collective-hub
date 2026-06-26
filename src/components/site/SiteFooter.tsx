@@ -12,7 +12,7 @@ export function SiteFooter() {
           ))}
         </div>
       </div>
-      <div className="mx-auto max-w-[1440px] px-8 py-16">
+      <div className="mx-auto max-w-[1440px] px-4 py-12 sm:px-8 sm:py-16">
         <div className="grid gap-12 md:grid-cols-4">
           <div>
             <Link to="/" className="font-display text-2xl tracking-tight">

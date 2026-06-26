@@ -33,9 +33,9 @@ function HomePage() {
 function Hero() {
   return (
     <section className="bg-sand-hero">
-      <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-center gap-8 px-8 pb-12 pt-14 lg:grid-cols-[1.15fr_1fr_1fr]">
+      <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-center gap-8 px-4 pb-12 pt-10 sm:px-8 sm:pt-14 lg:grid-cols-[1.15fr_1fr_1fr]">
         <div>
-          <h1 className="font-display text-[clamp(64px,7.5vw,124px)] uppercase leading-[0.84] tracking-[-0.045em] text-ink">
+          <h1 className="font-display text-[clamp(54px,11vw,124px)] uppercase leading-[0.84] tracking-[-0.045em] text-ink">
             Bid.<br />Win.<br />Repeat.
           </h1>
           <p className="mt-7 max-w-[340px] text-lg leading-snug text-ink/65">
@@ -51,7 +51,7 @@ function Hero() {
           </div>
         </div>
 
-        <div className="relative flex h-[440px] items-end justify-center lg:h-[520px]">
+        <div className="relative flex h-[340px] items-end justify-center sm:h-[440px] lg:h-[520px]">
           <img
             src={heroShoe}
             alt="Air Jordan 1 Retro High OG Mocha on a sandstone plinth"
@@ -105,11 +105,11 @@ function Hero() {
 function StatsBar() {
   return (
     <section className="border-t border-ink/15 bg-sand-hero">
-      <div className="mx-auto flex max-w-[1440px] flex-wrap items-center px-8 py-7">
-        <Stat icon={<TrendingUp size={26} />} value="12" label="Live Auctions" />
-        <Stat icon={<Users size={26} />} value="1.2K" label="Users Watching" />
-        <Stat icon={<Wallet size={26} />} value="₹2.4 CR+" label="Total Volume" />
-        <button className="ml-auto inline-flex items-center gap-3 font-display text-[15px] uppercase tracking-[0.08em]">
+      <div className="mx-auto flex max-w-[1440px] flex-wrap items-center gap-y-5 px-4 py-7 sm:px-8">
+        <Stat icon={<TrendingUp size={24} />} value="12" label="Live Auctions" />
+        <Stat icon={<Users size={24} />} value="1.2K" label="Users Watching" />
+        <Stat icon={<Wallet size={24} />} value="₹2.4 CR+" label="Total Volume" />
+        <button className="ml-auto inline-flex items-center gap-3 font-display text-sm uppercase tracking-[0.08em] sm:text-[15px]">
           <TrendingUp size={16} /> Market Pulse <ArrowRight size={16} />
         </button>
       </div>
@@ -118,7 +118,7 @@ function StatsBar() {
 }
 function Stat({ icon, value, label }: { icon: React.ReactNode; value: string; label: string }) {
   return (
-    <div className="flex items-center gap-4 border-r border-ink/15 px-12 first:pl-0">
+    <div className="flex items-center gap-3 border-r border-ink/15 px-5 first:pl-0 sm:gap-4 sm:px-12">
       <div className="text-ink/80">{icon}</div>
       <div>
         <div className="font-display text-3xl leading-none">{value}</div>
@@ -139,7 +139,7 @@ function MarketStrip() {
   ];
   return (
     <section className="bg-ink py-10 text-cream">
-      <div className="mx-auto flex max-w-[1440px] flex-wrap items-end gap-6 px-8">
+      <div className="mx-auto flex max-w-[1440px] flex-wrap items-end gap-x-4 gap-y-4 px-4 sm:px-8 sm:gap-x-6">
         {filters.map(([l, v], i) => (
           <div key={l} className={`px-6 ${i === 0 ? "pl-0" : "border-l border-cream/15"}`}>
             <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-cream/55">{l}</div>
@@ -154,7 +154,7 @@ function MarketStrip() {
         </div>
       </div>
 
-      <div className="mx-auto mt-7 grid max-w-[1440px] grid-cols-2 gap-4 px-8 sm:grid-cols-3 lg:grid-cols-6">
+      <div className="mx-auto mt-7 grid max-w-[1440px] grid-cols-2 gap-4 px-4 sm:grid-cols-3 sm:px-8 lg:grid-cols-6">
         {liveAuctions.map((a) => (
           <Link
             key={a.id}
@@ -179,7 +179,7 @@ function MarketStrip() {
         ))}
       </div>
 
-      <div className="mx-auto mt-7 max-w-[1440px] px-8">
+      <div className="mx-auto mt-7 max-w-[1440px] px-4 sm:px-8">
         <div className="relative h-[3px] rounded bg-cream/15">
           <span className="absolute left-0 top-0 h-full w-1/3 rounded bg-cream" />
         </div>
@@ -197,7 +197,7 @@ function HowItWorks() {
   ];
   return (
     <section className="bg-cream py-20">
-      <div className="mx-auto max-w-[1440px] px-8">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-8">
         <h2 className="mb-12 font-display text-[34px] uppercase tracking-[-0.01em]">How It Works</h2>
         <div className="flex flex-col items-center gap-8 lg:flex-row lg:gap-2">
           {steps.map((s, i) => (
@@ -233,7 +233,7 @@ function MarketMoves() {
   ];
   return (
     <section className="border-t border-ink/15 bg-cream py-6">
-      <div className="mx-auto flex max-w-[1440px] items-center gap-5 px-8">
+      <div className="mx-auto flex max-w-[1440px] items-center gap-5 px-4 sm:px-8">
         <div className="flex flex-none items-center gap-2.5 font-display text-sm uppercase tracking-[0.08em]">
           <Zap size={16} className="text-gold" /> Market Moves
         </div>
@@ -257,9 +257,9 @@ function MarketMoves() {
 function StayAhead() {
   return (
     <section className="bg-ink py-16 text-cream">
-      <div className="mx-auto flex max-w-[1440px] flex-col items-start justify-between gap-8 px-8 lg:flex-row lg:items-center">
+      <div className="mx-auto flex max-w-[1440px] flex-col items-start justify-between gap-8 px-4 sm:px-8 lg:flex-row lg:items-center">
         <div>
-          <h2 className="font-display text-[40px] uppercase tracking-[-0.02em]">Stay Ahead of the Drop.</h2>
+          <h2 className="font-display text-3xl uppercase tracking-[-0.02em] sm:text-[40px]">Stay Ahead of the Drop.</h2>
           <p className="mt-2 text-cream/65">Get updates on exclusive drops and live auctions.</p>
         </div>
         <form className="flex w-full max-w-[560px]">
