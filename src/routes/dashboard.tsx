@@ -1,12 +1,15 @@
-import { createFileRoute, Outlet, Link } from "@tanstack/react-router";
+import { createFileRoute, Outlet, Link, useNavigate } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { SiteLayout } from "@/components/site/SiteLayout";
-import { Home, List, Plus, Package, Wallet, BarChart3, Settings, BadgeCheck, Star } from "lucide-react";
+import { Home, List, Plus, Package, Wallet, BarChart3, Settings, BadgeCheck, Star, Lock } from "lucide-react";
+import { useRole } from "@/lib/role-store";
 
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
     meta: [
       { title: "Seller Dashboard — HYPE" },
       { name: "description", content: "Manage your listings, orders, payouts and analytics from your HYPE seller dashboard." },
+      { name: "robots", content: "noindex, nofollow" },
     ],
   }),
   component: DashboardLayout,
@@ -23,6 +26,34 @@ const items: { to: string; label: string; icon: typeof Home; exact?: boolean }[]
 ];
 
 function DashboardLayout() {
+  const { role } = useRole();
+  const navigate = useNavigate();
+  const allowed = role === "seller" || role === "admin";
+
+  useEffect(() => {
+    if (!allowed) {
+      const t = setTimeout(() => navigate({ to: "/auth/login" }), 1500);
+      return () => clearTimeout(t);
+    }
+  }, [allowed, navigate]);
+
+  if (!allowed) {
+    return (
+      <SiteLayout>
+        <div className="mx-auto flex min-h-[60vh] max-w-md flex-col items-center justify-center px-6 text-center">
+          <Lock className="mb-4 text-ink/50" size={32} />
+          <h1 className="font-display text-3xl uppercase tracking-tight">Seller area</h1>
+          <p className="mt-3 text-sm text-ink/65">
+            You need a seller account to access the dashboard. Redirecting to sign-in…
+          </p>
+          <Link to="/auth/login" className="mt-6 inline-flex bg-ink px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-cream">
+            Sign in
+          </Link>
+        </div>
+      </SiteLayout>
+    );
+  }
+
   return (
     <SiteLayout>
       <div className="bg-sand">
