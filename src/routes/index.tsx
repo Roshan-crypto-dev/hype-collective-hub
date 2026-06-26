@@ -75,7 +75,8 @@ function Hero() {
               <span className="font-display text-[52px] leading-none tracking-[-0.02em]">₹18,500</span>
               <ArrowUpRight size={18} className="mt-2 text-ink/60" />
             </div>
-            <div className="mt-1 text-sm font-semibold text-gold">+ ₹300</div>
+            <div className="mt-2 text-[10px] font-bold uppercase tracking-[0.16em] text-ink/55">Min. next bid</div>
+            <div className="text-sm font-semibold text-gold">+ ₹300</div>
           </div>
           <div className="mt-5">
             <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink/55">Ends In</div>

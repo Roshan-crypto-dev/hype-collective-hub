@@ -1,8 +1,17 @@
 import { Link } from "@tanstack/react-router";
 
 export function SiteFooter() {
+  const press = ["Economic Times", "YourStory", "Inc42", "Hypebeast IN", "GQ India"];
   return (
     <footer className="bg-ink text-cream">
+      <div className="border-b border-cream/10">
+        <div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-center gap-x-12 gap-y-4 px-8 py-7 text-[10px] font-bold uppercase tracking-[0.28em] text-cream/45">
+          <span className="text-cream/65">As seen in</span>
+          {press.map((p) => (
+            <span key={p} className="opacity-70 transition hover:opacity-100">{p}</span>
+          ))}
+        </div>
+      </div>
       <div className="mx-auto max-w-[1440px] px-8 py-16">
         <div className="grid gap-12 md:grid-cols-4">
           <div>
@@ -19,10 +28,10 @@ export function SiteFooter() {
             <h4 className="mb-5 text-[11px] font-bold uppercase tracking-[0.22em] text-cream">Marketplace</h4>
             <ul className="space-y-3 text-sm text-cream/75">
               <li><Link to="/shop" className="hover:text-cream">Shop</Link></li>
-              <li><Link to="/live-auctions/chicago" className="hover:text-cream">Live Auctions</Link></li>
+              <li><Link to="/auctions/live" className="hover:text-cream">Live Auctions</Link></li>
               <li><Link to="/sell" className="hover:text-cream">Sell With Us</Link></li>
               <li><Link to="/wishlist" className="hover:text-cream">Wishlist</Link></li>
-              <li><Link to="/account" className="hover:text-cream">Your Account</Link></li>
+              <li><Link to="/me" className="hover:text-cream">Your Account</Link></li>
             </ul>
           </div>
           <div>

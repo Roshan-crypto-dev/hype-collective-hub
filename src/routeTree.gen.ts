@@ -16,11 +16,14 @@ import { Route as SignupRouteImport } from './routes/signup'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as ShippingRouteImport } from './routes/shipping'
 import { Route as SellerRouteImport } from './routes/seller'
+import { Route as SellWithUsRouteImport } from './routes/sell-with-us'
 import { Route as SellRouteImport } from './routes/sell'
 import { Route as ReturnsRouteImport } from './routes/returns'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as MeRouteImport } from './routes/me'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as LiveAuctionsRouteImport } from './routes/live-auctions'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CheckoutRouteImport } from './routes/checkout'
@@ -107,6 +110,11 @@ const SellerRoute = SellerRouteImport.update({
   path: '/seller',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SellWithUsRoute = SellWithUsRouteImport.update({
+  id: '/sell-with-us',
+  path: '/sell-with-us',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SellRoute = SellRouteImport.update({
   id: '/sell',
   path: '/sell',
@@ -122,6 +130,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NotificationsRoute = NotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MeRoute = MeRouteImport.update({
   id: '/me',
   path: '/me',
@@ -130,6 +143,11 @@ const MeRoute = MeRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LiveAuctionsRoute = LiveAuctionsRouteImport.update({
+  id: '/live-auctions',
+  path: '/live-auctions',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -233,9 +251,9 @@ const MeAddressesRoute = MeAddressesRouteImport.update({
   getParentRoute: () => MeRoute,
 } as any)
 const LiveAuctionsIdRoute = LiveAuctionsIdRouteImport.update({
-  id: '/live-auctions/$id',
-  path: '/live-auctions/$id',
-  getParentRoute: () => rootRouteImport,
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => LiveAuctionsRoute,
 } as any)
 const DashboardSettingsRoute = DashboardSettingsRouteImport.update({
   id: '/settings',
@@ -396,11 +414,14 @@ export interface FileRoutesByFullPath {
   '/checkout': typeof CheckoutRouteWithChildren
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRouteWithChildren
+  '/live-auctions': typeof LiveAuctionsRouteWithChildren
   '/login': typeof LoginRoute
   '/me': typeof MeRouteWithChildren
+  '/notifications': typeof NotificationsRoute
   '/privacy': typeof PrivacyRoute
   '/returns': typeof ReturnsRoute
   '/sell': typeof SellRoute
+  '/sell-with-us': typeof SellWithUsRoute
   '/seller': typeof SellerRoute
   '/shipping': typeof ShippingRoute
   '/shop': typeof ShopRouteWithChildren
@@ -457,10 +478,13 @@ export interface FileRoutesByTo {
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRouteWithChildren
   '/contact': typeof ContactRoute
+  '/live-auctions': typeof LiveAuctionsRouteWithChildren
   '/login': typeof LoginRoute
+  '/notifications': typeof NotificationsRoute
   '/privacy': typeof PrivacyRoute
   '/returns': typeof ReturnsRoute
   '/sell': typeof SellRoute
+  '/sell-with-us': typeof SellWithUsRoute
   '/seller': typeof SellerRoute
   '/shipping': typeof ShippingRoute
   '/shop': typeof ShopRouteWithChildren
@@ -521,11 +545,14 @@ export interface FileRoutesById {
   '/checkout': typeof CheckoutRouteWithChildren
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRouteWithChildren
+  '/live-auctions': typeof LiveAuctionsRouteWithChildren
   '/login': typeof LoginRoute
   '/me': typeof MeRouteWithChildren
+  '/notifications': typeof NotificationsRoute
   '/privacy': typeof PrivacyRoute
   '/returns': typeof ReturnsRoute
   '/sell': typeof SellRoute
+  '/sell-with-us': typeof SellWithUsRoute
   '/seller': typeof SellerRoute
   '/shipping': typeof ShippingRoute
   '/shop': typeof ShopRouteWithChildren
@@ -587,11 +614,14 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/contact'
     | '/dashboard'
+    | '/live-auctions'
     | '/login'
     | '/me'
+    | '/notifications'
     | '/privacy'
     | '/returns'
     | '/sell'
+    | '/sell-with-us'
     | '/seller'
     | '/shipping'
     | '/shop'
@@ -648,10 +678,13 @@ export interface FileRouteTypes {
     | '/cart'
     | '/checkout'
     | '/contact'
+    | '/live-auctions'
     | '/login'
+    | '/notifications'
     | '/privacy'
     | '/returns'
     | '/sell'
+    | '/sell-with-us'
     | '/seller'
     | '/shipping'
     | '/shop'
@@ -711,11 +744,14 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/contact'
     | '/dashboard'
+    | '/live-auctions'
     | '/login'
     | '/me'
+    | '/notifications'
     | '/privacy'
     | '/returns'
     | '/sell'
+    | '/sell-with-us'
     | '/seller'
     | '/shipping'
     | '/shop'
@@ -776,11 +812,14 @@ export interface RootRouteChildren {
   CheckoutRoute: typeof CheckoutRouteWithChildren
   ContactRoute: typeof ContactRoute
   DashboardRoute: typeof DashboardRouteWithChildren
+  LiveAuctionsRoute: typeof LiveAuctionsRouteWithChildren
   LoginRoute: typeof LoginRoute
   MeRoute: typeof MeRouteWithChildren
+  NotificationsRoute: typeof NotificationsRoute
   PrivacyRoute: typeof PrivacyRoute
   ReturnsRoute: typeof ReturnsRoute
   SellRoute: typeof SellRoute
+  SellWithUsRoute: typeof SellWithUsRoute
   SellerRoute: typeof SellerRoute
   ShippingRoute: typeof ShippingRoute
   ShopRoute: typeof ShopRouteWithChildren
@@ -791,7 +830,6 @@ export interface RootRouteChildren {
   AuthForgotRoute: typeof AuthForgotRoute
   AuthLoginRoute: typeof AuthLoginRoute
   AuthSignupRoute: typeof AuthSignupRoute
-  LiveAuctionsIdRoute: typeof LiveAuctionsIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -845,6 +883,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SellerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sell-with-us': {
+      id: '/sell-with-us'
+      path: '/sell-with-us'
+      fullPath: '/sell-with-us'
+      preLoaderRoute: typeof SellWithUsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sell': {
       id: '/sell'
       path: '/sell'
@@ -866,6 +911,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/notifications': {
+      id: '/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof NotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/me': {
       id: '/me'
       path: '/me'
@@ -878,6 +930,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/live-auctions': {
+      id: '/live-auctions'
+      path: '/live-auctions'
+      fullPath: '/live-auctions'
+      preLoaderRoute: typeof LiveAuctionsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -1022,10 +1081,10 @@ declare module '@tanstack/react-router' {
     }
     '/live-auctions/$id': {
       id: '/live-auctions/$id'
-      path: '/live-auctions/$id'
+      path: '/$id'
       fullPath: '/live-auctions/$id'
       preLoaderRoute: typeof LiveAuctionsIdRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof LiveAuctionsRoute
     }
     '/dashboard/settings': {
       id: '/dashboard/settings'
@@ -1338,6 +1397,18 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
   DashboardRouteChildren,
 )
 
+interface LiveAuctionsRouteChildren {
+  LiveAuctionsIdRoute: typeof LiveAuctionsIdRoute
+}
+
+const LiveAuctionsRouteChildren: LiveAuctionsRouteChildren = {
+  LiveAuctionsIdRoute: LiveAuctionsIdRoute,
+}
+
+const LiveAuctionsRouteWithChildren = LiveAuctionsRoute._addFileChildren(
+  LiveAuctionsRouteChildren,
+)
+
 interface MeRouteChildren {
   MeAddressesRoute: typeof MeAddressesRoute
   MeBidsRoute: typeof MeBidsRoute
@@ -1384,11 +1455,14 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutRoute: CheckoutRouteWithChildren,
   ContactRoute: ContactRoute,
   DashboardRoute: DashboardRouteWithChildren,
+  LiveAuctionsRoute: LiveAuctionsRouteWithChildren,
   LoginRoute: LoginRoute,
   MeRoute: MeRouteWithChildren,
+  NotificationsRoute: NotificationsRoute,
   PrivacyRoute: PrivacyRoute,
   ReturnsRoute: ReturnsRoute,
   SellRoute: SellRoute,
+  SellWithUsRoute: SellWithUsRoute,
   SellerRoute: SellerRoute,
   ShippingRoute: ShippingRoute,
   ShopRoute: ShopRouteWithChildren,
@@ -1399,18 +1473,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthForgotRoute: AuthForgotRoute,
   AuthLoginRoute: AuthLoginRoute,
   AuthSignupRoute: AuthSignupRoute,
-  LiveAuctionsIdRoute: LiveAuctionsIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
