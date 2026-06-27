@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Minus, Plus, ChevronRight, Eye, Users, Info, BadgeCheck, ShieldCheck, Truck, ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { Minus, Plus, Eye, Users, Info, BadgeCheck, ShieldCheck, Truck, ArrowRight, Heart, ZoomIn, X, ChevronLeft, ChevronRight, Gavel, Share2 } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { liveAuctions, productImages } from "@/lib/hype-data";
 
@@ -42,71 +43,232 @@ function AuctionPage() {
   );
 }
 
-function HeroBlock() {
+const gallery = [
+  productImages.chicago,
+  productImages.jordan4,
+  productImages.offwhite,
+  productImages.dunk,
+  productImages.yeezy,
+];
+
+function MediaGallery({ onZoom }: { onZoom: (i: number) => void }) {
+  const [active, setActive] = useState(0);
   return (
-    <div className="mb-9 grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.05fr_1fr]">
-      <div className="relative aspect-[1/1.06] overflow-hidden rounded-2xl">
-        <img src={productImages.chicago} alt="Air Jordan 1 Chicago" className="h-full w-full object-cover" />
-        <span className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-green px-3 py-1 text-xs font-bold text-green-ink">
-          <span className="h-1.5 w-1.5 rounded-full bg-green-ink" /> LIVE
+    <div className="flex flex-col gap-3 sm:gap-4">
+      <div className="relative overflow-hidden rounded-3xl bg-white shadow-[0_30px_60px_-30px_rgba(0,0,0,0.35)]">
+        <button
+          type="button"
+          onClick={() => onZoom(active)}
+          className="group block aspect-square w-full sm:aspect-[4/4.6]"
+          aria-label="Zoom product image"
+        >
+          <img
+            src={gallery[active]}
+            alt="Air Jordan 1 Chicago"
+            className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+          />
+        </button>
+        <span className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-red px-3 py-1 text-xs font-bold text-cream">
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-cream" /> LIVE
         </span>
-      </div>
-
-      <div>
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-green px-3 py-1 text-xs font-bold text-green-ink">
-          <span className="h-1.5 w-1.5 rounded-full bg-green-ink" /> LIVE
+        <div className="absolute right-4 top-4 flex flex-col gap-2">
+          <button
+            type="button"
+            onClick={() => onZoom(active)}
+            className="grid h-10 w-10 place-items-center rounded-full bg-white/90 text-ink shadow-sm backdrop-blur hover:bg-white"
+            aria-label="Zoom"
+          >
+            <ZoomIn size={16} />
+          </button>
+          <button
+            type="button"
+            className="grid h-10 w-10 place-items-center rounded-full bg-white/90 text-ink shadow-sm backdrop-blur hover:bg-white"
+            aria-label="Share"
+          >
+            <Share2 size={16} />
+          </button>
+        </div>
+        <span className="absolute bottom-4 right-4 rounded-full bg-ink/80 px-3 py-1 text-[11px] font-semibold text-cream backdrop-blur">
+          {active + 1} / {gallery.length}
         </span>
-        <h1 className="mt-4 font-display text-[34px] leading-[0.98] tracking-[-0.02em] sm:text-[46px]">
-          Air Jordan 1<br />Retro High OG<br />'Chicago'
-        </h1>
-        <div className="mt-4 flex items-center gap-3 text-sm font-semibold">
-          Nike
-          <span className="inline-flex items-center gap-1 rounded-full bg-green px-2.5 py-0.5 text-[11px] text-green-ink">
-            <BadgeCheck size={12} /> HYPE Verified
-          </span>
-        </div>
-        <div className="mt-4 border-y border-line py-3 text-sm text-ink/65">
-          <b className="text-ink">Condition:</b> DS &nbsp;|&nbsp; <b className="text-ink">Size:</b> UK 9 / US 10
-        </div>
-        <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-ink/65">
-          <span><b className="text-ink">Current Bid</b></span>
-          <span className="inline-flex items-center gap-1.5"><Eye size={14} /> 1,425 Watching</span>
-          <span className="inline-flex items-center gap-1.5"><Users size={14} /> 460 Active bidders</span>
-        </div>
-        <div className="mt-2.5 text-base font-bold text-green-ink">+ ₹500 <span className="block text-xs font-medium text-muted-fg">Next minimum bid</span></div>
-        <div className="mt-6">
-          <div className="text-xs font-semibold uppercase tracking-[0.06em] text-ink/65">Ends In</div>
-          <div className="mt-1 font-display text-[40px] leading-none tracking-[0.02em] text-red sm:text-[52px]">00 : 14 : 21</div>
-        </div>
+        <button
+          type="button"
+          onClick={() => setActive((a) => (a - 1 + gallery.length) % gallery.length)}
+          className="absolute left-3 top-1/2 hidden h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-ink shadow-sm hover:bg-white sm:grid"
+          aria-label="Previous image"
+        >
+          <ChevronLeft size={18} />
+        </button>
+        <button
+          type="button"
+          onClick={() => setActive((a) => (a + 1) % gallery.length)}
+          className="absolute right-3 top-1/2 hidden h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-ink shadow-sm hover:bg-white sm:grid"
+          aria-label="Next image"
+        >
+          <ChevronRight size={18} />
+        </button>
       </div>
+      <div className="flex gap-2 overflow-x-auto pb-1 sm:gap-3">
+        {gallery.map((src, i) => (
+          <button
+            key={i}
+            type="button"
+            onClick={() => setActive(i)}
+            className={`relative aspect-square h-20 w-20 shrink-0 overflow-hidden rounded-xl border-2 transition sm:h-[88px] sm:w-[88px] ${
+              i === active ? "border-ink" : "border-transparent opacity-70 hover:opacity-100"
+            }`}
+            aria-label={`Show image ${i + 1}`}
+          >
+            <img src={src} alt="" className="h-full w-full object-cover" />
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
 
-      <div className="rounded-3xl bg-cream p-6 sm:p-8">
-        <h3 className="mb-4 text-base font-semibold">Place Your Bid</h3>
-        <div className="mb-2 flex items-center justify-between gap-3">
-          <span className="font-display text-[36px] leading-none tracking-[-0.02em] sm:text-[44px]">₹28,800</span>
-          <div className="flex gap-2.5">
-            <button className="grid h-12 w-12 place-items-center rounded-xl border border-line bg-white"><Minus size={18} /></button>
-            <button className="grid h-12 w-12 place-items-center rounded-xl border border-line bg-white"><Plus size={18} /></button>
+function ZoomDialog({ index, onClose, onChange }: { index: number; onClose: () => void; onChange: (i: number) => void }) {
+  return (
+    <div
+      className="fixed inset-0 z-[100] grid place-items-center bg-ink/90 p-4 backdrop-blur"
+      role="dialog"
+      aria-modal="true"
+      onClick={onClose}
+    >
+      <button
+        type="button"
+        onClick={onClose}
+        className="absolute right-4 top-4 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-cream hover:bg-white/20"
+        aria-label="Close zoom"
+      >
+        <X size={20} />
+      </button>
+      <button
+        type="button"
+        onClick={(e) => { e.stopPropagation(); onChange((index - 1 + gallery.length) % gallery.length); }}
+        className="absolute left-4 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-white/10 text-cream hover:bg-white/20"
+        aria-label="Previous"
+      >
+        <ChevronLeft size={22} />
+      </button>
+      <img
+        src={gallery[index]}
+        alt=""
+        onClick={(e) => e.stopPropagation()}
+        className="max-h-[90vh] max-w-[92vw] rounded-2xl object-contain"
+      />
+      <button
+        type="button"
+        onClick={(e) => { e.stopPropagation(); onChange((index + 1) % gallery.length); }}
+        className="absolute right-4 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-white/10 text-cream hover:bg-white/20"
+        aria-label="Next"
+      >
+        <ChevronRight size={22} />
+      </button>
+    </div>
+  );
+}
+
+function HeroBlock() {
+  const [zoomAt, setZoomAt] = useState<number | null>(null);
+  const [wished, setWished] = useState(false);
+  return (
+    <div className="mb-9 grid grid-cols-1 gap-8 lg:grid-cols-[1.35fr_1fr]">
+      <MediaGallery onZoom={(i) => setZoomAt(i)} />
+
+      <div className="flex flex-col gap-6">
+        <div>
+          <div className="flex items-center justify-between gap-3">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-green px-3 py-1 text-xs font-bold text-green-ink">
+              <span className="h-1.5 w-1.5 rounded-full bg-green-ink" /> LIVE
+            </span>
+            <button
+              type="button"
+              onClick={() => setWished((w) => !w)}
+              aria-pressed={wished}
+              aria-label="Add to wishlist"
+              className={`grid h-11 w-11 place-items-center rounded-full border transition ${
+                wished ? "border-red bg-red/10 text-red" : "border-line bg-white text-ink hover:border-ink"
+              }`}
+            >
+              <Heart size={18} fill={wished ? "currentColor" : "none"} />
+            </button>
+          </div>
+          <h1 className="mt-4 font-display text-[34px] leading-[0.98] tracking-[-0.02em] sm:text-[48px]">
+            Air Jordan 1<br />Retro High OG 'Chicago'
+          </h1>
+          <div className="mt-4 flex items-center gap-3 text-sm font-semibold">
+            Nike
+            <span className="inline-flex items-center gap-1 rounded-full bg-green px-2.5 py-0.5 text-[11px] text-green-ink">
+              <BadgeCheck size={12} /> HYPE Verified
+            </span>
+          </div>
+          <div className="mt-4 border-y border-line py-3 text-sm text-ink/65">
+            <b className="text-ink">Condition:</b> DS &nbsp;|&nbsp; <b className="text-ink">Size:</b> UK 9 / US 10
+          </div>
+          <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-ink/65">
+            <span className="inline-flex items-center gap-1.5"><Eye size={14} /> 1,425 Watching</span>
+            <span className="inline-flex items-center gap-1.5"><Users size={14} /> 460 Active bidders</span>
+          </div>
+          <div className="mt-6 flex items-end justify-between gap-6">
+            <div>
+              <div className="text-xs font-semibold uppercase tracking-[0.06em] text-ink/65">Current Bid</div>
+              <div className="mt-1 font-display text-[44px] leading-none tracking-[-0.02em] sm:text-[56px]">₹28,800</div>
+              <div className="mt-1 text-sm font-semibold text-green-ink">+ ₹500 next minimum bid</div>
+            </div>
+            <div className="text-right">
+              <div className="text-xs font-semibold uppercase tracking-[0.06em] text-ink/65">Ends In</div>
+              <div className="mt-1 font-display text-[28px] leading-none tracking-[0.02em] text-red sm:text-[36px]">00:14:21</div>
+            </div>
           </div>
         </div>
-        <div className="mb-5 text-sm text-ink/65">Minimum next: <b className="text-ink">₹28,800</b></div>
-        <button className="w-full rounded-full border border-line bg-white py-4 font-bold hover:border-ink">PLACE BID</button>
-        <div className="my-3 flex gap-3">
-          {["+300", "+500", "+1000"].map((q) => (
-            <button key={q} className="flex-1 rounded-full border border-line bg-white py-3.5 text-sm font-semibold hover:border-ink">{q}</button>
-          ))}
-        </div>
-        <button className="w-full rounded-full bg-ink py-4 font-bold tracking-wide text-cream">BUY NOW</button>
-        <div className="mt-5 flex items-center">
-          {["A", "B", "C", "D", "E", "F", "G"].map((l, i) => (
-            <div key={l} className={`-ml-2 grid h-7 w-7 place-items-center rounded-full border-2 border-cream text-xs font-bold text-white first:ml-0 bidder-${i}`}
-              style={{ background: ["#ef4444","#f59e0b","#eab308","#22c55e","#06b6d4","#3b82f6","#a855f7"][i] }}>
-              {l}
+
+        <div className="rounded-3xl bg-cream p-5 sm:p-7">
+          <h3 className="mb-4 text-base font-semibold">Place Your Bid</h3>
+          <div className="mb-2 flex items-center justify-between gap-3">
+            <span className="font-display text-[32px] leading-none tracking-[-0.02em] sm:text-[40px]">₹28,800</span>
+            <div className="flex gap-2.5">
+              <button className="grid h-11 w-11 place-items-center rounded-xl border border-line bg-white"><Minus size={18} /></button>
+              <button className="grid h-11 w-11 place-items-center rounded-xl border border-line bg-white"><Plus size={18} /></button>
             </div>
-          ))}
-          <span className="ml-3 text-sm font-semibold text-ink/65">+16</span>
+          </div>
+          <div className="mb-4 text-sm text-ink/65">Minimum next: <b className="text-ink">₹28,800</b></div>
+          <div className="mb-3 flex gap-2.5">
+            {["+300", "+500", "+1000"].map((q) => (
+              <button key={q} className="flex-1 rounded-full border border-line bg-white py-3 text-sm font-semibold hover:border-ink">{q}</button>
+            ))}
+          </div>
+          <div className="flex gap-2.5">
+            <button className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-ink py-4 font-bold tracking-wide text-cream hover:bg-ink/90">
+              <Gavel size={16} /> PLACE BID
+            </button>
+            <button
+              type="button"
+              onClick={() => setWished((w) => !w)}
+              aria-pressed={wished}
+              aria-label="Add to wishlist"
+              className={`grid h-[52px] w-[52px] shrink-0 place-items-center rounded-full border transition ${
+                wished ? "border-red bg-red/10 text-red" : "border-line bg-white text-ink hover:border-ink"
+              }`}
+            >
+              <Heart size={18} fill={wished ? "currentColor" : "none"} />
+            </button>
+          </div>
+          <div className="mt-5 flex items-center">
+            {["A","B","C","D","E","F","G"].map((l, i) => (
+              <div key={l} className="-ml-2 grid h-7 w-7 place-items-center rounded-full border-2 border-cream text-xs font-bold text-white first:ml-0"
+                style={{ background: ["#ef4444","#f59e0b","#eab308","#22c55e","#06b6d4","#3b82f6","#a855f7"][i] }}>
+                {l}
+              </div>
+            ))}
+            <span className="ml-3 text-sm font-semibold text-ink/65">+16 bidding now</span>
+          </div>
         </div>
       </div>
+
+      {zoomAt !== null && (
+        <ZoomDialog index={zoomAt} onClose={() => setZoomAt(null)} onChange={setZoomAt} />
+      )}
     </div>
   );
 }
