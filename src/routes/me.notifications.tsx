@@ -1,6 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/me/notifications")({ component: Page });
+export const Route = createFileRoute("/me/notifications")({
+  head: () => ({ meta: [{ title: "Notification Preferences — HYPE Account" }, { name: "description", content: "Choose how HYPE notifies you about bids, drops and orders." }] }),
+  component: Page,
+});
+
 
 const PREFS = [
   { label: "Outbid alerts", hint: "Email + push when someone outbids you" },

@@ -1,7 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Truck } from "lucide-react";
 
-export const Route = createFileRoute("/me/orders")({ component: Page });
+export const Route = createFileRoute("/me/orders")({
+  head: () => ({ meta: [{ title: "Orders & Shipments — HYPE Account" }, { name: "description", content: "Authentication status and shipping updates for your HYPE orders." }] }),
+  component: Page,
+});
+
 
 const ORDERS = [
   { id: "HC-29104", item: "AJ1 Chicago", amount: 28500, status: "In authentication", date: "Today" },
