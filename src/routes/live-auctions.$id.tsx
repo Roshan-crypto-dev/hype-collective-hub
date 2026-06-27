@@ -174,7 +174,7 @@ function HeroBlock() {
   const [zoomAt, setZoomAt] = useState<number | null>(null);
   const [wished, setWished] = useState(false);
   return (
-    <div className="mb-9 grid grid-cols-1 gap-8 lg:grid-cols-[1.35fr_1fr]">
+    <div className="mb-9 grid grid-cols-1 gap-8 lg:grid-cols-[1.55fr_1fr] lg:gap-12">
       <MediaGallery onZoom={(i) => setZoomAt(i)} />
 
       <div className="flex flex-col gap-6">
