@@ -55,11 +55,11 @@ function MediaGallery({ onZoom }: { onZoom: (i: number) => void }) {
   const [active, setActive] = useState(0);
   return (
     <div className="flex flex-col gap-3 sm:gap-4">
-      <div className="relative overflow-hidden rounded-3xl bg-white shadow-[0_30px_60px_-30px_rgba(0,0,0,0.35)]">
+      <div className="relative overflow-hidden rounded-3xl bg-white shadow-[0_40px_80px_-30px_rgba(0,0,0,0.4)]">
         <button
           type="button"
           onClick={() => onZoom(active)}
-          className="group block aspect-square w-full sm:aspect-[4/4.6]"
+          className="group block aspect-[4/5] w-full sm:aspect-[4/4.9] lg:min-h-[640px] xl:min-h-[760px]"
           aria-label="Zoom product image"
         >
           <img
@@ -68,6 +68,7 @@ function MediaGallery({ onZoom }: { onZoom: (i: number) => void }) {
             className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
           />
         </button>
+
         <span className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-red px-3 py-1 text-xs font-bold text-cream">
           <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-cream" /> LIVE
         </span>
