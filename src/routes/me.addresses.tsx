@@ -1,7 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Plus } from "lucide-react";
 
-export const Route = createFileRoute("/me/addresses")({ component: Page });
+export const Route = createFileRoute("/me/addresses")({
+  head: () => ({ meta: [{ title: "Shipping Addresses — HYPE Account" }, { name: "description", content: "Manage saved shipping addresses for HYPE deliveries." }] }),
+  component: Page,
+});
+
 
 const A = [
   { label: "Home", line1: "402, Lotus Heights", line2: "Bandra West, Mumbai 400050", phone: "+91 98xxxxxx12", primary: true },

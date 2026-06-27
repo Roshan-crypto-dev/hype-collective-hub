@@ -4,18 +4,54 @@ import { Minus, Plus, Eye, Users, Info, BadgeCheck, ShieldCheck, Truck, ArrowRig
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { liveAuctions, productImages } from "@/lib/hype-data";
 
+function findAuctionItem(id: string) {
+  const live = liveAuctions.find((a) => a.id === id);
+  if (live) return { name: live.name, image: live.image, price: live.bid, brand: live.brand };
+  return { name: "Air Jordan 1 Retro High OG 'Chicago'", image: productImages.chicago, price: 28800, brand: "Nike" };
+}
+
 export const Route = createFileRoute("/live-auctions/$id")({
-  head: ({ params }) => ({
-    meta: [
-      { title: `Live Auction — Air Jordan 1 Retro High OG 'Chicago' | HYPE` },
-      { name: "description", content: "Live auction for Air Jordan 1 Retro High OG 'Chicago'. Real-time bidding, HYPE-verified, ships in 3–8 days." },
-      { property: "og:title", content: `Live Auction — Air Jordan 1 'Chicago' | HYPE` },
-      { property: "og:description", content: `Live bidding on hype culture's most wanted drops. Item ID: ${params.id}.` },
-      { property: "og:image", content: productImages.chicago },
-    ],
-  }),
+  head: ({ params }) => {
+    const item = findAuctionItem(params.id);
+    const url = `https://hype-collective-hub.lovable.app/live-auctions/${params.id}`;
+    const desc = `Live auction for ${item.name}. Real-time bidding, HYPE-verified, ships in 3–8 days.`;
+    return {
+      meta: [
+        { title: `Live Auction — ${item.name} | HYPE` },
+        { name: "description", content: desc },
+        { property: "og:title", content: `Live Auction — ${item.name}` },
+        { property: "og:description", content: desc },
+        { property: "og:type", content: "product" },
+        { property: "og:url", content: url },
+        { property: "og:image", content: item.image },
+        { name: "twitter:image", content: item.image },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            name: item.name,
+            image: [item.image],
+            brand: { "@type": "Brand", name: item.brand },
+            description: desc,
+            offers: {
+              "@type": "Offer",
+              priceCurrency: "INR",
+              price: item.price,
+              availability: "https://schema.org/InStock",
+              url,
+            },
+          }),
+        },
+      ],
+    };
+  },
   component: AuctionPage,
 });
+
 
 function AuctionPage() {
   return (

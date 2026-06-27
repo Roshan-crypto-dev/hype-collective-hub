@@ -1,0 +1,24 @@
+# HYPE
+
+> India's first live auction marketplace for sneakers, apparel, and hype-culture collectibles. Every lot is HYPE-Verified.
+
+HYPE runs real-time auctions and fixed-price Buy Now drops. Buyers bid live on authenticated sneakers and streetwear; sellers list inventory through a verified intake flow.
+
+## Pages
+
+- [Home](/): Live auction highlights, ending-soon drops, and the HYPE story.
+- [Shop](/shop): Buy Now and fixed-price listings from HYPE-verified sellers.
+- [Auctions](/auctions): Browse live, upcoming, and ending-soon auctions.
+- [Live Auctions](/auctions/live): Auctions currently accepting bids.
+- [Ending Soon](/auctions/ending-soon): Auctions closing within the hour.
+- [Upcoming](/auctions/upcoming): Drops scheduled to go live.
+- [Sell with HYPE](/sell): Apply to consign sneakers and streetwear.
+- [About](/about): What HYPE is and how authentication works.
+- [Contact](/contact): Reach the HYPE team.
+- [Shipping](/shipping): Delivery timelines and tracking.
+- [Returns](/returns): Return policy for authenticated lots.
+
+## Optional
+
+- [Privacy](/privacy)
+- [Terms](/terms)

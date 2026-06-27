@@ -16,10 +16,13 @@ export const Route = createFileRoute("/shop")({
       { name: "description", content: "Browse Buy Now and fixed-price listings from HYPE-verified sellers. Filter by brand, size, condition and price." },
       { property: "og:title", content: "Shop — HYPE Verified Listings" },
       { property: "og:description", content: "Browse Buy Now listings from HYPE-verified sellers." },
+      { property: "og:url", content: "https://hype-collective-hub.lovable.app/shop" },
     ],
+    links: [{ rel: "canonical", href: "https://hype-collective-hub.lovable.app/shop" }],
   }),
   component: ShopPage,
 });
+
 
 function ShopPage() {
   const { q } = Route.useSearch();
@@ -34,7 +37,9 @@ function ShopPage() {
       <Crumbs />
       <div className="bg-shop-bg">
         <div className="mx-auto max-w-[1440px] px-4 py-9 sm:px-8">
+          <h1 className="mb-5 font-display text-3xl tracking-tight sm:text-4xl">Shop Authenticated Sneakers &amp; Apparel</h1>
           <TopBar count={filtered.length} q={q} />
+
           <Chips q={q} />
           <div className="grid gap-9 lg:grid-cols-[290px_1fr]">
             <Filters />

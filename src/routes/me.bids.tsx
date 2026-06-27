@@ -1,6 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/me/bids")({ component: Page });
+export const Route = createFileRoute("/me/bids")({
+  head: () => ({ meta: [{ title: "My Bids — HYPE Account" }, { name: "description", content: "Track your active and past auction bids on HYPE." }] }),
+  component: Page,
+});
+
 
 const BIDS = [
   { item: "Yeezy 350 V2 Beluga", id: "yeezy-beluga", my: 24500, top: 25200, status: "outbid" },

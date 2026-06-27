@@ -1,7 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CreditCard, Plus, Smartphone } from "lucide-react";
 
-export const Route = createFileRoute("/me/payments")({ component: Page });
+export const Route = createFileRoute("/me/payments")({
+  head: () => ({ meta: [{ title: "Payment Methods — HYPE Account" }, { name: "description", content: "Manage cards, UPI and saved payment methods on HYPE." }] }),
+  component: Page,
+});
+
 
 function Page() {
   return (

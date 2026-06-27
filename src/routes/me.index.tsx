@@ -2,7 +2,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useCart } from "@/lib/cart-store";
 import { useRole } from "@/lib/role-store";
 
-export const Route = createFileRoute("/me/")({ component: Page });
+export const Route = createFileRoute("/me/")({
+  head: () => ({ meta: [{ title: "Overview — Your HYPE Account" }, { name: "description", content: "Your HYPE account overview: active bids, recent orders, and watchlist." }] }),
+  component: Page,
+});
+
 
 function Card({ label, value, to }: { label: string; value: string; to: string }) {
   return (
