@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://hype-collective-hub.lovable.app/sitemap.xml

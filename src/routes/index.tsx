@@ -7,14 +7,19 @@ import { liveAuctions } from "@/lib/hype-data";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "HYPE — Bid. Win. Repeat. India's First Live Auction Marketplace" },
+      { title: "HYPE — Bid. Win. Repeat. Live Auctions India" },
       { name: "description", content: "Real-time live auctions for sneakers, apparel and collectibles. Authenticated by HYPE. Place bids, win drops, repeat." },
       { property: "og:title", content: "HYPE — Bid. Win. Repeat." },
       { property: "og:description", content: "Real-time live auctions for sneakers, apparel and collectibles. Authenticated by HYPE." },
+      { property: "og:url", content: "https://hype-collective-hub.lovable.app/" },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/33a05d28-f1a5-44b7-9478-d41fc03196ea/id-preview-4bc0e740--c7880825-ba78-4c23-b936-3028dcab9ba1.lovable.app-1782126208701.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/33a05d28-f1a5-44b7-9478-d41fc03196ea/id-preview-4bc0e740--c7880825-ba78-4c23-b936-3028dcab9ba1.lovable.app-1782126208701.png" },
     ],
+    links: [{ rel: "canonical", href: "https://hype-collective-hub.lovable.app/" }],
   }),
   component: HomePage,
 });
+
 
 function HomePage() {
   return (
@@ -149,8 +154,9 @@ function MarketStrip() {
           </div>
         ))}
         <div className="ml-auto flex gap-3">
-          <button className="grid h-10 w-10 place-items-center rounded-full border border-cream/35"><ChevronLeft size={16} /></button>
-          <button className="grid h-10 w-10 place-items-center rounded-full border border-cream/35"><ChevronRight size={16} /></button>
+          <button aria-label="Previous market items" className="grid h-10 w-10 place-items-center rounded-full border border-cream/35"><ChevronLeft size={16} /></button>
+          <button aria-label="Next market items" className="grid h-10 w-10 place-items-center rounded-full border border-cream/35"><ChevronRight size={16} /></button>
+
         </div>
       </div>
 
@@ -268,9 +274,10 @@ function StayAhead() {
             placeholder="Enter your email"
             className="flex-1 border border-cream/30 border-r-0 bg-transparent px-5 py-4 text-cream placeholder:text-cream/50 focus:outline-none"
           />
-          <button className="flex w-16 items-center justify-center bg-cream text-ink">
+          <button type="submit" aria-label="Subscribe to newsletter" className="flex w-16 items-center justify-center bg-cream text-ink">
             <ArrowRight size={20} />
           </button>
+
         </form>
       </div>
     </section>

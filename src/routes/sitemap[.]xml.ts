@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
+import { shopItems, liveAuctions } from "@/lib/hype-data";
 
-const BASE_URL = "";
+const BASE_URL = "https://hype-collective-hub.lovable.app";
 
 interface SitemapEntry {
   path: string;
@@ -16,9 +17,27 @@ export const Route = createFileRoute("/sitemap.xml")({
         const entries: SitemapEntry[] = [
           { path: "/", changefreq: "daily", priority: "1.0" },
           { path: "/shop", changefreq: "daily", priority: "0.9" },
+          { path: "/auctions", changefreq: "hourly", priority: "0.9" },
+          { path: "/auctions/live", changefreq: "hourly", priority: "0.9" },
+          { path: "/auctions/ending-soon", changefreq: "hourly", priority: "0.8" },
+          { path: "/auctions/upcoming", changefreq: "daily", priority: "0.7" },
           { path: "/sell", changefreq: "weekly", priority: "0.8" },
           { path: "/about", changefreq: "monthly", priority: "0.5" },
           { path: "/contact", changefreq: "monthly", priority: "0.5" },
+          { path: "/shipping", changefreq: "monthly", priority: "0.4" },
+          { path: "/returns", changefreq: "monthly", priority: "0.4" },
+          { path: "/privacy", changefreq: "yearly", priority: "0.3" },
+          { path: "/terms", changefreq: "yearly", priority: "0.3" },
+          ...liveAuctions.map((a) => ({
+            path: `/live-auctions/${a.id}`,
+            changefreq: "hourly" as const,
+            priority: "0.8",
+          })),
+          ...shopItems.map((s) => ({
+            path: `/live-auctions/${s.id}`,
+            changefreq: "daily" as const,
+            priority: "0.7",
+          })),
         ];
         const urls = entries
           .map((e) =>
